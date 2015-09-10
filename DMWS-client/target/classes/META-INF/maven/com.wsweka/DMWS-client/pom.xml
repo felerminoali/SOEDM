@@ -9,12 +9,10 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-    <groupId>com.wsweka</groupId>
     <artifactId>DMWS-client</artifactId>
     <name>DMWS-client</name>
 
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
     
     <organization>
         <!-- Used as the 'Vendor' for JNLP generation -->
