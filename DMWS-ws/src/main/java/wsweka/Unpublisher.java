@@ -1,11 +1,13 @@
-package ws;
+package wsweka;
 
-public class Main {
+public class Unpublisher {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println("ola");
 	}
 
 }
