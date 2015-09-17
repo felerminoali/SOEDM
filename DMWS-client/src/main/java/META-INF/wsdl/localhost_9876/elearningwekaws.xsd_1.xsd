@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://wsweka/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://wsweka/">
+
+<xs:element name="Exception" type="tns:Exception"/>
+
+<xs:element name="JAXBException" type="tns:JAXBException"/>
+
+<xs:element name="execute" type="tns:execute"/>
+
+<xs:element name="executeAssociate" type="tns:executeAssociate"/>
+
+<xs:element name="executeAssociateResponse" type="tns:executeAssociateResponse"/>
+
+<xs:element name="executeClassifier" type="tns:executeClassifier"/>
+
+<xs:element name="executeClassifierResponse" type="tns:executeClassifierResponse"/>
+
+<xs:element name="executeCluster" type="tns:executeCluster"/>
+
+<xs:element name="executeClusterResponse" type="tns:executeClusterResponse"/>
+
+<xs:element name="executeFilter" type="tns:executeFilter"/>
+
+<xs:element name="executeFilterResponse" type="tns:executeFilterResponse"/>
+
+<xs:element name="executeManualDescritezation" type="tns:executeManualDescritezation"/>
+
+<xs:element name="executeManualDescritezationResponse" type="tns:executeManualDescritezationResponse"/>
+
+<xs:element name="executeResponse" type="tns:executeResponse"/>
+
+<xs:element name="executeTreeClassifer" type="tns:executeTreeClassifer"/>
+
+<xs:element name="executeTreeClassiferResponse" type="tns:executeTreeClassiferResponse"/>
+
+<xs:element name="executeTwo" type="tns:executeTwo"/>
+
+<xs:element name="executeTwoResponse" type="tns:executeTwoResponse"/>
+
+<xs:element name="executeWithDiscritize" type="tns:executeWithDiscritize"/>
+
+<xs:element name="executeWithDiscritizeResponse" type="tns:executeWithDiscritizeResponse"/>
+
+<xs:element name="executeWithManualDiscritize" type="tns:executeWithManualDiscritize"/>
+
+<xs:element name="executeWithManualDiscritizeResponse" type="tns:executeWithManualDiscritizeResponse"/>
+
+<xs:element name="visualizeTreeGraph" type="tns:visualizeTreeGraph"/>
+
+<xs:element name="visualizeTreeGraphResponse" type="tns:visualizeTreeGraphResponse"/>
+
+<xs:element name="xmlToArrf" type="tns:xmlToArrf"/>
+
+<xs:element name="xmlToArrfResponse" type="tns:xmlToArrfResponse"/>
+
+<xs:complexType name="execute">
+<xs:sequence>
+<xs:element name="input" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeManualDescritezation">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeManualDescritezationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="visualizeTreeGraph">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="visualizeTreeGraphResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeFilter">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeFilterResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeCluster">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeClusterResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeWithManualDiscritize">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeWithManualDiscritizeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeClassifier">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeClassifierResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="xmlToArrf">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="xmlToArrfResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="JAXBException">
+<xs:sequence>
+<xs:element name="errorCode" type="xs:string" minOccurs="0"/>
+<xs:element name="linkedException" type="tns:throwable" minOccurs="0"/>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="throwable">
+<xs:sequence>
+<xs:element name="stackTrace" type="tns:stackTraceElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="stackTraceElement" final="extension restriction">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="executeWithDiscritize">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeWithDiscritizeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeTreeClassifer">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeTreeClassiferResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeAssociate">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeAssociateResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeTwo">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="executeTwoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-    <artifactId>DMWS</artifactId>
-    <groupId>com.wsweka</groupId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
+        <artifactId>DMWS</artifactId>
+        <groupId>com.wsweka</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
     <artifactId>DMWS-client</artifactId>
     <name>DMWS-client</name>
@@ -29,18 +29,29 @@
 
         <plugins>
 
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                 <version>3.1</version>
+
+               <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+               </configuration>
+            </plugin>
+            
+           
+
             <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>2.0</version>
                 <configuration>
 
-                    <mainClass>org.DMWS.client.MainApp</mainClass>
-
-                    <!-- only required if signing the jar file -->
-                    <keyStoreAlias>example-user</keyStoreAlias>
-                    <keyStorePassword>example-password</keyStorePassword>
-                    <allPermissions>true</allPermissions>
+                 
+                    
+                    <mainClass>mz.com.MainApp</mainClass>
+                    
 
                 </configuration>
             </plugin>
@@ -88,6 +99,13 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax.help</groupId>
+            <artifactId>javahelp</artifactId>
+            <version>2.0.05</version>
         </dependency>
 
     </dependencies>

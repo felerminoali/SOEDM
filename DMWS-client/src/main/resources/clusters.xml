@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<clusters>
+    
+    <config>
+        <cluster>weka.clusterers.CLOPE</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.CheckClusterer</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.ClusterEvaluation</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.Cobweb</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.DBSCAN</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.EM</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.FarthestFirst</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.FilteredClusterer</cluster>
+        <defaults></defaults>
+    </config>
+    
+    
+    <config>
+        <cluster>weka.clusterers.HierarchicalClusterer</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.MakeDensityBasedClusterer</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.OPTICS</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.SimpleKMeans</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.forOPTICSAndDBScan</cluster>
+        <defaults></defaults>
+    </config>
+    
+    <config>
+        <cluster>weka.clusterers.sIB</cluster>
+        <defaults></defaults>
+    </config>
+    
+</clusters>

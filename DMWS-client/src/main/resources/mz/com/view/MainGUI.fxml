@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane prefHeight="500.0" prefWidth="800.0" side="LEFT" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.view.MainGUIController">
+   <tabs>
+      <Tab fx:id="tabPrepro" text="Preprocessing">
+         <content>
+            <BorderPane>
+               <left>
+                  <TreeView fx:id="treeCon" prefHeight="388.0" prefWidth="263.0" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
+                  </TreeView>
+               </left>
+               <center>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                           <children>
+                              <Button fx:id="btnChoose" mnemonicParsing="false" onAction="#handleBtnChooseFilter" text="Choose" />
+                              <TextField fx:id="txtFilter" editable="false" prefHeight="25.0" prefWidth="373.0" promptText="None" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="btnApply" mnemonicParsing="false" onAction="#handleButtonApply" text="Apply" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TextArea fx:id="txtSummary" editable="false" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </VBox>
+               </center>
+               <bottom>
+                  <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="BOTTOM_LEFT">
+                     <children>
+                        <ProgressBar fx:id="filterProgress" prefHeight="18.0" prefWidth="185.0" progress="0.0" />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                     </BorderPane.margin>
+                  </HBox>
+               </bottom>
+               <top>
+                  <HBox spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button disable="true" mnemonicParsing="false" text="View Data" />
+                        <Button fx:id="btnExecute" disable="true" mnemonicParsing="false" onAction="#handleBtnExecute" text="Retrieve Data" />
+                        <Button fx:id="btnUndo" disable="true" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBtnUndo" text="Undo" />
+                        <Button fx:id="btnUndo1" disable="true" layoutX="187.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBtnUndo" text="Save..." />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </BorderPane.margin>
+                  </HBox>
+               </top>
+            </BorderPane>
+         </content>
+      </Tab>
+      <Tab fx:id="tabClassify" text="Classify">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <HBox spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="btnChooseClassifer" mnemonicParsing="false" onAction="#handleBtnChooseClassifer" text="Choose" />
+                        <TextField fx:id="txtClassifier" editable="false" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </HBox>
+               </top>
+               <left>
+                  <VBox BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox layoutX="20.0" layoutY="20.0" spacing="10.0">
+                           <children>
+                              <RadioButton fx:id="radioUseTrainClass" mnemonicParsing="false" text="Use training set" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <RadioButton fx:id="radioCrossVal" mnemonicParsing="false" text="Cross-validation" />
+                              <TextField fx:id="txtCrossVal" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <RadioButton fx:id="radioParcValClass" mnemonicParsing="false" text="Percentage split %" />
+                              <TextField fx:id="txtPercValClass" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button fx:id="btnClassStart" mnemonicParsing="false" onAction="#handleBtnClassStart" text="Start" HBox.hgrow="ALWAYS" />
+                              <Button disable="true" mnemonicParsing="false" text="Stop" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <ListView fx:id="listClassScheme" prefHeight="256.0" prefWidth="266.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </left>
+               <center>
+                  <TextArea fx:id="txtOutputClass" editable="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ProgressBar fx:id="classProgress" prefHeight="18.0" prefWidth="185.0" progress="0.0" />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </bottom>
+            </BorderPane>
+         </content>
+      </Tab>
+      <Tab fx:id="tabCluster" text="Cluster">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ProgressBar fx:id="clusProgress" prefHeight="18.0" prefWidth="185.0" progress="0.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </HBox>
+               </bottom>
+               <center>
+                  <TextArea fx:id="txtOutputCluster" editable="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <left>
+                  <VBox BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox spacing="10.0">
+                           <children>
+                              <RadioButton fx:id="radioUseTrainClust" mnemonicParsing="false" text="Use training set" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <RadioButton fx:id="radioParcValClust" mnemonicParsing="false" text="Percentage split %" />
+                              <TextField fx:id="txtPercValCluster" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button fx:id="btnClusStart" mnemonicParsing="false" onAction="#handleBtnClusStart" text="Start" HBox.hgrow="ALWAYS" />
+                              <Button disable="true" mnemonicParsing="false" text="Stop" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <ListView fx:id="listClustScheme" prefHeight="256.0" prefWidth="266.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </left>
+               <top>
+                  <HBox spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="btnChooseCluster" mnemonicParsing="false" onAction="#handleBtnChooseCluster" text="Choose" />
+                        <TextField fx:id="txtCluster" editable="false" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </HBox>
+               </top>
+            </BorderPane>
+         </content>
+      </Tab>
+      <Tab fx:id="tabAssociator" text="Associate">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ProgressBar fx:id="assoProgress" prefHeight="18.0" prefWidth="185.0" progress="0.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </HBox>
+               </bottom>
+               <center>
+                  <TextArea fx:id="txtOutputAssociator" editable="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <left>
+                  <VBox BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button fx:id="btnAssoStart" mnemonicParsing="false" onAction="#handleBtnAssoStart" text="Start" HBox.hgrow="ALWAYS" />
+                              <Button disable="true" mnemonicParsing="false" text="Stop" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <ListView fx:id="listAssocScheme" prefHeight="256.0" prefWidth="266.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </left>
+               <top>
+                  <HBox spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="btnChooseAssociator" mnemonicParsing="false" onAction="#handleBtnChooseAssociator" text="Choose" />
+                        <TextField fx:id="txtAssociator" editable="false" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </HBox>
+               </top>
+            </BorderPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>

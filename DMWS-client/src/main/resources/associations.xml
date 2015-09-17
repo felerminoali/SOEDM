@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<associations>
+    
+     <config>
+        <associatior>weka.associations.Apriori</associatior>
+        <defaults>-N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -c -1</defaults>
+    </config>
+    
+     <config>
+        <associatior>weka.associations.FilteredAssociator</associatior>
+        <defaults> -F "weka.filters.MultiFilter -F \"weka.filters.unsupervised.attribute.ReplaceMissingValues \"" -c -1 -W weka.associations.Apriori -- -N 10 -T 0 -C 0.9 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -c -1</defaults>
+    </config>
+    
+     <config>
+        <associatior>weka.associations.FPGrowth</associatior>
+        <defaults></defaults>
+    </config>
+    
+     <config>
+        <associatior>weka.associations.GeneralizedSequentialPatterns</associatior>
+        <defaults>-S 0.9 -I 0 -F -1</defaults>
+    </config>
+    
+     <config>
+        <associatior>weka.associations.PredictiveApriori</associatior>
+        <defaults>-N 100 -c -1</defaults>
+    </config>
+    
+     <config>
+        <associatior>weka.associations.Tertius</associatior>
+        <defaults>-K 10 -F 0.0 -N 1.0 -L 4 -G 0 -c 0 -I 0 -P 0</defaults>
+    </config>
+    
+     
+    
+</associations>

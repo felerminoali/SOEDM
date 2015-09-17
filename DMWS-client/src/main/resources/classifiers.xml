@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+
+<classifers>
+    
+    <method>
+        <name>bayes</name>
+        
+        <config>
+            <classifer>weka.classifiers.bayes.AODE</classifer>
+            <defaults> </defaults>
+        </config>
+            
+        <config>
+            <classifer>weka.classifiers.bayes.AODEsr</classifer>
+            <defaults> </defaults>
+        </config>
+            
+        <config>
+            <classifer>weka.classifiers.bayes.BayesNet</classifer>
+            <defaults> </defaults>
+        </config>
+            
+        <config>
+            <classifer>weka.classifiers.bayes.BayesianLogisticRegression</classifer>
+            <defaults> </defaults>
+        </config>
+            
+        <config>
+            <classifer>weka.classifiers.bayes.ComplementNaiveBayes</classifer>
+            <defaults> </defaults>
+        </config>
+            
+        <config>
+            <classifer>weka.classifiers.bayes.DMNBtext</classifer>
+            <defaults> </defaults>
+        </config>
+            
+        <config>
+            <classifer>weka.classifiers.bayes.DMNBtext$DNBBinary</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.bayes.HNB</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.bayes.NaiveBayes</classifer>
+            <defaults></defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.bayes.NaiveBayesMultinomial</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.bayes.NaiveBayesMultinomialUpdateable</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.bayes.NaiveBayesSimple</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.bayes.NaiveBayesUpdateable</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.bayes.WAODE</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.bayes.net</classifer>
+            <defaults> </defaults>
+        </config>
+       
+    </method>
+    
+    <method>
+        
+        <name>functions</name>
+        
+        <config>
+            <classifer>weka.classifiers.functions.GaussianProcesses</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.IsotonicRegression</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.LeastMedSq</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.LibLINEAR</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.functions.LibSVM</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.functions.LinearRegression</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.functions.Logistic</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.MultilayerPerceptron</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.functions.PLSClassifier</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.functions.PaceRegression</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.RBFNetwork</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.SMO</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.SMOreg</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.SimpleLinearRegression</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.SimpleLogistic</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.VotedPerceptron</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.Winnow</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.neural</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.pace</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.functions.supportVector</classifer>
+            <defaults> </defaults>
+        </config>
+    </method>
+       
+    <method>
+        <name>lazy</name>
+        
+        <config>
+            <classifer>weka.classifiers.lazy.IB1</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.lazy.IBk</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.lazy.KStar</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.lazy.LBR</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.lazy.LWL</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.lazy.kstar</classifer>
+            <defaults> </defaults>
+        </config>
+        
+    </method>   
+   
+    <method>
+        <name>meta</name>
+        
+        <config>
+            <classifer>weka.classifiers.meta.AdaBoostM1</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.AdditiveRegression</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.AttributeSelectedClassifier</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.Bagging</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.CVParameterSelection</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.ClassificationViaClustering</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.ClassificationViaRegression</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.CostSensitiveClassifier</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.Dagging</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.Decorate</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.END</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.meta.FilteredClassifier</classifer>
+            <defaults> </defaults>
+        </config>
+
+
+        <config>
+            <classifer>weka.classifiers.meta.Grading</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.GridSearch</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.LogitBoost</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.MetaCost</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.MultiBoostAB</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.MultiClassClassifier</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.MultiScheme</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.OrdinalClassClassifier</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.RacedIncrementalLogitBoost</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.RandomCommittee</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.RandomSubSpace</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.RegressionByDiscretization</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.RotationForest</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.meta.Stacking</classifer>
+            <defaults> </defaults>
+        </config>
+        
+    </method>
+
+    <method>
+        <name>mi</name>
+        
+        <config>
+            <classifer>weka.classifiers.mi.CitationKNN</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MDD</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MIBoost</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MIDD</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MIEMDD</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MILR</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        
+        <config>
+            <classifer>weka.classifiers.mi.MINND</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MIOptimalBall</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MISMO</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MISVM</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.MIWrapper</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.mi.SimpleMI</classifer>
+            <defaults> </defaults>
+        </config>
+        
+    </method>    
+    
+    <method>
+        <name>misc</name>
+        
+        <config>
+            <classifer>weka.classifiers.misc.HyperPipes</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.misc.SerializedClassifier</classifer>
+            <defaults> </defaults>
+        </config>
+        
+        <config>
+            <classifer>weka.classifiers.misc.VFI</classifer>
+            <defaults> </defaults>
+        </config>
+        
+    </method>
+    
+    <method>
+        <name>rules</name>
+        
+        
+        <config>
+            <classifer>weka.classifiers.rules.ConjunctiveRule</classifer>
+            <defaults> </defaults>
+        </config>
+            
+        <config>
+            <classifer>weka.classifiers.rules.DTNB</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.rules.DecisionTable</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.rules.DecisionTableHashKey</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.rules.JRip</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.rules.M5Rules</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.rules.NNge</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.rules.OneR</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.rules.PART</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.rules.Prism</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.rules.Ridor</classifer>
+            <defaults> </defaults>
+        </config>
+                
+
+        <config>
+            <classifer>weka.classifiers.rules.RuleStats</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.rules.ZeroR</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.rules.part</classifer>
+            <defaults> </defaults>
+        </config>
+                
+    </method>
+    
+    <method>
+        <name>tree</name>
+        
+        <config>
+            <classifer>weka.classifiers.trees.ADTree</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.BFTree</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.DecisionStump</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.FT</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.Id3</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.J48</classifer>
+            <defaults>-C 0.25 -M 2</defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.J48graft</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.LADTree</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.LMT</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.M5P</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.NBTree</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.REPTree</classifer>
+            <defaults> </defaults>
+        </config>
+                
+                
+        <config>
+            <classifer>weka.classifiers.trees.RandomForest</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.RandomTree</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.SimpleCart</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.UserClassifier</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.adtree</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.ft</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.j48</classifer>
+            <defaults> </defaults>
+        </config>
+                
+        <config>
+            <classifer>weka.classifiers.trees.lmt</classifer>
+            <defaults> </defaults>
+        </config>
+
+        <config>
+            <classifer>weka.classifiers.trees.m5</classifer>
+            <defaults> </defaults>
+        </config>
+
+
+    </method>
+        
+       
+</classifers>
+
+

@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<filters>
+
+    <config>
+        <filter>weka.filters.AllFilter</filter>
+        <defaults></defaults>
+    </config>
+    <config>
+        <filter>weka.filters.CheckSource</filter>
+        <defaults></defaults>
+    </config>
+    <config>
+        <filter>weka.filters.MultiFilter</filter>
+        <defaults></defaults>
+    </config>
+
+    <strategy>
+        <name>supervised</name>
+        
+        <inputType>
+            <name>attribute</name>
+            
+            <config>
+                <filter>weka.filters.supervised.attribute.AddClassification</filter>
+                <defaults></defaults>
+            </config>
+               
+            <config>
+                <filter>weka.filters.supervised.attribute.AttributeSelection</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.supervised.attribute.ClassOrder</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.supervised.attribute.Discretize</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.supervised.attribute.NominalToBinary</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.supervised.attribute.PLSFilter</filter>
+                <defaults></defaults>
+            </config>
+        </inputType>
+        
+        <inputType>
+            <name>instance</name>
+            
+             <config>
+                <filter>weka.filters.supervised.instance.Resample</filter>
+                <defaults></defaults>
+            </config>
+            <config>
+                <filter>weka.filters.supervised.instance.SMOTE</filter>
+                <defaults></defaults>
+            </config>
+            <config>
+                <filter>weka.filters.supervised.instance.SpreadSubsample</filter>
+                <defaults></defaults>
+            </config>
+            <config>
+                <filter>weka.filters.supervised.instance.StratifiedRemoveFolds</filter>
+                <defaults></defaults>
+            </config>
+            
+        </inputType>
+    </strategy>
+    
+    <strategy>
+        <name>unsupervised</name>
+        
+        <inputType>
+            <name>attribute</name>
+            
+              <config>
+                <filter>weka.filters.unsupervised.attribute.Add</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.AddCluster</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.AddExpression</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.AddID</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.AddNoise</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.AddValues</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.AddValues</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Center</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.ChangeDateFormat</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.ClassAssigner</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.ClusterMembership</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Copy</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Discretize</filter>
+                <defaults>-B 10 -M -1.0 -R first-last</defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.ManualDiscretize</filter>
+                <defaults>-A low medium high -C fail pass good execellent</defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.FirstOrder</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.InterquartileRange</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.KernelFilter</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.MakeIndicator</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.MathExpression</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.MergeTwoValues</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.MultiInstanceToPropositional</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.NominalToBinary</filter>
+                <defaults></defaults>
+            </config>
+                
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.NominalToString</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Normalize</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.NumericCleaner</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.NumericToBinary</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.NumericToNominal</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.NumericTransform</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Obfuscate</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.PKIDiscretize</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.PartitionedMultiFilter</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.PrincipalComponents</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.PrincipalComponents</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.PropositionalToMultiInstance</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.RELAGGS</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.RandomProjection</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.RandomSubset</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Remove</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.RemoveType</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.RemoveUseless</filter>
+                <defaults></defaults>
+            </config>
+                
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Reorder</filter>
+                <defaults></defaults>
+            </config>
+                
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.ReplaceMissingValues</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Standardize</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.StringToNominal</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.StringToWordVector</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.SwapValues</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.TimeSeriesDelta</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.TimeSeriesTranslate</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.attribute.Wavelet</filter>
+                <defaults></defaults>
+            </config>
+          
+        </inputType>
+        
+        <inputType>
+            <name>instance</name>
+            
+             <config>
+                <filter>weka.filters.unsupervised.instance.NonSparseToSparse</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.Normalize</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.Randomize</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.RemoveFolds</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.RemoveFrequentValues</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.RemoveMisclassified</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.RemovePercentage</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.RemoveRange</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.RemoveWithValues</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.Resample</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.ReservoirSample</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.SparseToNonSparse</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.SubsetByExpression</filter>
+                <defaults></defaults>
+            </config>
+                
+            <config>
+                <filter>weka.filters.unsupervised.instance.subsetbyexpression</filter>
+                <defaults></defaults>
+            </config>
+          
+        </inputType>
+    </strategy>
+    
+</filters>
