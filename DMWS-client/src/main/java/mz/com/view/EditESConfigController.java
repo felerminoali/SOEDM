@@ -71,7 +71,9 @@ public class EditESConfigController implements Initializable {
     @FXML
     public void handleBtnSave(){
     
-     String file = "src/expert.xml";
+       
+//     String file = "src/expert.xml";
+      String file = "src/main/resources/expert.xml";
         JAXBContext jaxbContext;
         try {
             jaxbContext = JAXBContext

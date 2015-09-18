@@ -92,7 +92,8 @@ public class AddConnectionController implements Initializable {
     private void handleBtnSave() {
         if (isInputValid()) {
 
-            String file = "src/datasource.xml";
+//            String file = "src/datasource.xml";
+            String file = "src/main/resources/datasource.xml";
             JAXBContext jaxbContext;
             try {
                 jaxbContext = JAXBContext

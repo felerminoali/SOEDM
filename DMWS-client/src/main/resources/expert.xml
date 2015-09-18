@@ -9,28 +9,17 @@
     <name>Expert System</name>
     <confidence>50</confidence>
     <attribute>
-        <id>84</id>
+        <id>12</id>
         <type>A</type>
-        <name>nAssmnts</name>
+        <name>dsds</name>
         <attribute>
-            <id>88</id>
+            <id>16</id>
             <type>V</type>
-            <name>low</name>
+            <name>fsfsfs</name>
             <attribute>
-                <id>113</id>
+                <id>26</id>
                 <type>C</type>
-                <name>Fail</name>
-            </attribute>
-        </attribute>
-        <attribute>
-            <id>98</id>
-            <type>V</type>
-            <name>medium</name>
-            <attribute>
-                <id>128</id>
-                <type>C</type>
-                <name>Pass</name>
-                <recommendation>&lt;html dir="ltr"&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable="true"&gt;&lt;p&gt;&lt;font face="Segoe UI"&gt;hdfshvfvdshvfhdsvjfsvjkcxbjkvjcxbjbdjvkjbzjkvkjc&lt;/font&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</recommendation>
+                <name>dgdgdg</name>
             </attribute>
         </attribute>
     </attribute>

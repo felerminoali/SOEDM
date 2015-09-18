@@ -107,7 +107,8 @@ public class MyTreeCellES extends TextFieldTreeCell<Object> {
 
                                         TreeItem<Object> c = getTreeView().getSelectionModel().getSelectedItem();
 
-                                        String file = "src/expert.xml";
+                                        String file = "src/main/resources/expert.xml";
+//                                         String file = "src/expert.xml";
                                         JAXBContext jaxbContext;
                                         try {
                                             jaxbContext = JAXBContext
@@ -251,7 +252,7 @@ public class MyTreeCellES extends TextFieldTreeCell<Object> {
 
         TreeItem<Object> newAttributeType = new TreeItem<>(attr, icon);
 
-        String file = "src/expert.xml";
+        String file = "src/main/resources/expert.xml";
         JAXBContext jaxbContext;
         try {
             jaxbContext = JAXBContext
@@ -355,7 +356,7 @@ public class MyTreeCellES extends TextFieldTreeCell<Object> {
                     AttributeType attr = (AttributeType) c.getValue();
                     attr.setName(textField.getText());
 
-                    String file = "src/expert.xml";
+                    String file = "src/main/resources/expert.xml";
                     JAXBContext jaxbContext;
                     try {
                         jaxbContext = JAXBContext

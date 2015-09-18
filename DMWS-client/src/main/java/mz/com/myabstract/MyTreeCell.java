@@ -101,9 +101,7 @@ public class MyTreeCell extends TextFieldTreeCell<String> {
                                 new EventHandler<ActionEvent>() {
                                     @Override
                                     public void handle(ActionEvent arg0) {
-//                                        System.out.println(((MenuItem)arg0.getSource()));
-
-//                                        System.out.println(getItem());
+//                                   
 
                                         try {
 
@@ -129,7 +127,7 @@ public class MyTreeCell extends TextFieldTreeCell<String> {
                                             JAXBContext jaxbContext = JAXBContext
                                             .newInstance(Connections.class);
                                             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                                            Connections datasource = (Connections) jaxbUnmarshaller.unmarshal(new File("src/datasource.xml"));
+                                            Connections datasource = (Connections) jaxbUnmarshaller.unmarshal(new File("src/main/resources/datasource.xml"));
 
                                             Datasource selectDataSrc = null;
                                             for (Datasource dataSrc : datasource.getDatasource()) {
@@ -139,10 +137,7 @@ public class MyTreeCell extends TextFieldTreeCell<String> {
                                                 }
                                             }
 
-//                                            Connections.Datasource dataSrc = new Connections.Datasource();
-//                                            dataSrc.setName(getItem());
-//                                            dataSrc.setDomainName("http://192.168.0.104:8282/moodle-latest-27/moodle");
-//                                            dataSrc.setToken("9c4991bde66fe656ecc942d9b61e0f04");
+//                                   
                                             controller.setDataSource(selectDataSrc);
 
                                             Scene scene = new Scene(page);
@@ -170,22 +165,17 @@ public class MyTreeCell extends TextFieldTreeCell<String> {
                                     @Override
                                     public void handle(ActionEvent arg0) {
 
-//                                       getTreeItem().getChildren().remove(getItem());
-//                                       getTreeItem().getChildren().remove(getItem());
-//                                       getTreeItem();
-//                                       (getScene().getWindow());
-//                                        System.out.println((getScene().getWindow()));
-//                                        System.out.println(getItem()); 
+//                               
                                         if (FXOptionPane.showConfirmDialog((Stage) getScene().getWindow(), "Are sure that want delete " + getItem() + " connection", "Confirm") == FXOptionPane.Response.YES) {
 
                                             try {
 
-                                                String file = "src/datasource.xml";
+                                                String file = "src/main/resources/datasource.xml";
                                                 // get the connection object
                                                 JAXBContext jaxbContext = JAXBContext
                                                 .newInstance(Connections.class);
                                                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                                                Connections datasource = (Connections) jaxbUnmarshaller.unmarshal(new File("src/datasource.xml"));
+                                                Connections datasource = (Connections) jaxbUnmarshaller.unmarshal(new File("src/main/resources/datasource.xml"));
 
                                                 for (Datasource dataSrc : datasource.getDatasource()) {
                                                     if (dataSrc.getName().equals(getItem())) {
@@ -258,7 +248,7 @@ public class MyTreeCell extends TextFieldTreeCell<String> {
                                             JAXBContext jaxbContext = JAXBContext
                                             .newInstance(Connections.class);
                                             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                                            Connections datasource = (Connections) jaxbUnmarshaller.unmarshal(new File("src/datasource.xml"));
+                                            Connections datasource = (Connections) jaxbUnmarshaller.unmarshal(new File("src/main/resources/datasource.xml"));
 
                                             Datasource selectDataSrc = null;
                                             for (Datasource dataSrc : datasource.getDatasource()) {
