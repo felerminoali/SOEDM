@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane prefHeight="500.0" prefWidth="800.0" side="LEFT" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.view.MainGUIController">
+<TabPane prefHeight="500.0" prefWidth="800.0" side="LEFT" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.view.MainGUIController">
    <tabs>
       <Tab fx:id="tabPrepro" text="Preprocessing">
          <content>
@@ -43,7 +43,7 @@
                   </VBox>
                </center>
                <bottom>
-                  <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="BOTTOM_LEFT">
+                  <HBox fx:id="HBxPre" alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="BOTTOM_LEFT">
                      <children>
                         <ProgressBar fx:id="filterProgress" prefHeight="18.0" prefWidth="185.0" progress="0.0" />
                      </children>
@@ -134,7 +134,7 @@
                   <TextArea fx:id="txtOutputClass" editable="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                </center>
                <bottom>
-                  <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+                  <HBox fx:id="HBxClass" alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
                      <children>
                         <ProgressBar fx:id="classProgress" prefHeight="18.0" prefWidth="185.0" progress="0.0" />
                      </children>
@@ -153,7 +153,7 @@
          <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <bottom>
-                  <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+                  <HBox fx:id="HBxClust" alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
                      <children>
                         <ProgressBar fx:id="clusProgress" prefHeight="18.0" prefWidth="185.0" progress="0.0" />
                      </children>
@@ -225,7 +225,7 @@
          <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <bottom>
-                  <HBox alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+                  <HBox fx:id="HBxAss" alignment="CENTER_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
                      <children>
                         <ProgressBar fx:id="assoProgress" prefHeight="18.0" prefWidth="185.0" progress="0.0" />
                      </children>

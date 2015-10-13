@@ -155,6 +155,7 @@ and open the template in the editor.
             <config>
                 <filter>weka.filters.unsupervised.attribute.ManualDiscretize</filter>
                 <defaults>-A low medium high -C fail pass</defaults>
+                <!--<defaults>-C fail pass</defaults>-->
             </config>
                 
             <config>

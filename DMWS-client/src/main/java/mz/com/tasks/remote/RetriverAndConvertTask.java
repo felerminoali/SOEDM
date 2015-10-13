@@ -25,7 +25,7 @@ import mz.com.wsweka.JAXBException_Exception;
  *
  * @author Lenovo
  */
-public class RetriverAndConvertTask extends Task<List<String>> {
+public class RetriverAndConvertTask extends Task<List<String>> implements Cancelable {
 
     private String token;
     private String domainName;
@@ -229,4 +229,10 @@ public class RetriverAndConvertTask extends Task<List<String>> {
 
     }
 
+    @Override
+    public void cancelProgress() {
+        updateMessage("Process cancelled!");
+        updateProgress(0, 100);
+        cancel(true);
+    }
 }

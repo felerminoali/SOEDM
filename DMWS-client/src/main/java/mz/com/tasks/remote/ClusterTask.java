@@ -15,7 +15,7 @@ import mz.com.wsweka.ElearningWekaWSService;
  *
  * @author Lenovo
  */
-public class ClusterTask extends Task<List<String>> {
+public class ClusterTask extends Task<List<String>> implements Cancelable {
 
     private String data;
     private String cluster;
@@ -62,4 +62,10 @@ public class ClusterTask extends Task<List<String>> {
         }
     }
 
+    @Override
+    public void cancelProgress() {
+        updateMessage("Process cancelled!");
+        updateProgress(0, 100);
+        cancel(true);
+    }
 }

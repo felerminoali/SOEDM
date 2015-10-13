@@ -15,7 +15,7 @@ import mz.com.wsweka.ElearningWekaWSService;
  *
  * @author Lenovo
  */
-public class FilterTask extends Task<List<String>> {
+public class FilterTask extends Task<List<String>> implements Cancelable {
 
     private String data;
     private String filter;
@@ -40,7 +40,7 @@ public class FilterTask extends Task<List<String>> {
             updateProgress(-1.0, 100);
 //            List<String> result = new ArrayList<>();
 //            result.add(newData);
-            updateMessage(newData); 
+            updateMessage(newData);
             updateProgress(0, 100);
 
             return new ArrayList<>();
@@ -52,7 +52,13 @@ public class FilterTask extends Task<List<String>> {
             return null;
         }
 
-        
+    }
+
+    @Override
+    public void cancelProgress() {
+        updateMessage("Process cancelled!");
+        updateProgress(0, 100);
+        cancel(true);
     }
 
 }

@@ -24,7 +24,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
@@ -36,10 +35,10 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import jaxb.connections.Connections;
@@ -52,7 +51,6 @@ import mz.com.MainApp;
 import mz.com.model.OutputHistory;
 import mz.com.myabstract.CallbackCustom;
 import mz.com.myabstract.CallbackHistoryOutput;
-import mz.com.myabstract.MyHistoryOutputListCell;
 import mz.com.tasks.remote.AssociateTask;
 import mz.com.tasks.remote.ClassifyTask;
 import mz.com.tasks.remote.ClusterTask;
@@ -99,6 +97,9 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
     @FXML
     private ProgressBar filterProgress, classProgress, clusProgress, assoProgress;
+
+    @FXML
+    private HBox HBxPre, HBxClass, HBxClust, HBxAss;
 
     public String evalution = "";
     private String clusterEvaluation = "";
@@ -373,12 +374,29 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
             task = new AssociateTask(data, associator);
 
+             // Creating a button to cancel the execution of the task
+            Button btnClose = new Button("X");
+
+            btnClose.setStyle("-fx-font: 8 arial;");
+            btnClose.setMaxSize(2, 2);
+
+            btnClose.setOnAction(e -> {
+                task.cancelProgress();
+            });
+
+            HBxAss.getChildren().addAll(btnClose);
+
+            // to disable the retriever button while is running the task
+            btnAssoStart.disableProperty().bind(task.runningProperty());
+            
             this.assoProgress.progressProperty().bind(task.progressProperty());
             task.messageProperty().addListener((w, o, n) -> {
                 txtOutputAssociator.clear();
                 txtOutputAssociator.appendText(n + "\n");
                 this.assHistorys.add(new OutputHistory(n, associator, null));
                 this.listAssocScheme.getSelectionModel().selectLast();
+                
+                 HBxAss.getChildren().remove(btnClose);
             });
 
             new Thread(task).start();
@@ -403,12 +421,29 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                 task = new ClusterTask(data, classifier, clusterEvaluation);
             }
 
+            // Creating a button to cancel the execution of the task
+            Button btnClose = new Button("X");
+
+            btnClose.setStyle("-fx-font: 8 arial;");
+            btnClose.setMaxSize(2, 2);
+
+            btnClose.setOnAction(e -> {
+                task.cancelProgress();
+            });
+
+            HBxClust.getChildren().addAll(btnClose);
+
+            // to disable the retriever button while is running the task
+            btnClusStart.disableProperty().bind(task.runningProperty());
+
             this.clusProgress.progressProperty().bind(task.progressProperty());
             task.messageProperty().addListener((w, o, n) -> {
                 txtOutputCluster.clear();
                 txtOutputCluster.appendText(n + "\n");
                 this.clusHistorys.add(new OutputHistory(n, classifier, clusterEvaluation));
                 this.listClustScheme.getSelectionModel().selectLast();
+                
+                HBxClust.getChildren().remove(btnClose);
             });
 
             new Thread(task).start();
@@ -433,12 +468,29 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                 task = new ClassifyTask(data, classifier, evalution);
             }
 
+            // Creating a button to cancel the execution of the task
+            Button btnClose = new Button("X");
+
+            btnClose.setStyle("-fx-font: 8 arial;");
+            btnClose.setMaxSize(2, 2);
+
+            btnClose.setOnAction(e -> {
+                task.cancelProgress();
+            });
+
+            HBxClass.getChildren().addAll(btnClose);
+
+            // to disable the retriever button while is running the task
+            btnClassStart.disableProperty().bind(task.runningProperty());
+
             this.classProgress.progressProperty().bind(task.progressProperty());
             task.messageProperty().addListener((w, o, n) -> {
                 txtOutputClass.clear();
                 txtOutputClass.appendText(n + "\n");
                 this.classifierHistorys.add(new OutputHistory(n, classifier, evalution));
                 this.listClassScheme.getSelectionModel().selectLast();
+
+                HBxClass.getChildren().remove(btnClose);
             });
 
             new Thread(task).start();
@@ -694,11 +746,28 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
                         ManualDiscretizeTask task = new ManualDiscretizeTask(data, filter);
 
+                        // Creating a button to cancel the execution of the task
+                        Button btnClose = new Button("X");
+
+                        btnClose.setStyle("-fx-font: 8 arial;");
+                        btnClose.setMaxSize(2, 2);
+
+                        btnClose.setOnAction(e -> {
+                            task.cancelProgress();
+                        });
+
+                        HBxPre.getChildren().addAll(btnClose);
+
+                        // to disable the retriever button while is running the task
+                        btnApply.disableProperty().bind(task.runningProperty());
+
                         this.filterProgress.progressProperty().bind(task.progressProperty());
                         task.messageProperty().addListener((w, o, n) -> {
                             txtSummary.clear();
                             txtSummary.appendText(n + "\n");
                             this.dataList.add(n);
+
+                            HBxPre.getChildren().remove(btnClose);
                         });
 
                         new Thread(task).start();
@@ -719,11 +788,28 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
                         FilterTask task = new FilterTask(data, filter);
 
+                        // Creating a button to cancel the execution of the task
+                        Button btnClose = new Button("X");
+
+                        btnClose.setStyle("-fx-font: 8 arial;");
+                        btnClose.setMaxSize(2, 2);
+
+                        btnClose.setOnAction(e -> {
+                            task.cancelProgress();
+                        });
+
+                        HBxPre.getChildren().addAll(btnClose);
+
+                        // to disable the retriever button while is running the task
+                        btnApply.disableProperty().bind(task.runningProperty());
+
                         this.filterProgress.progressProperty().bind(task.progressProperty());
                         task.messageProperty().addListener((w, o, n) -> {
                             txtSummary.clear();
                             txtSummary.appendText(n + "\n");
                             this.dataList.add(n);
+
+                            HBxPre.getChildren().remove(btnClose);
                         });
 
                         new Thread(task).start();
@@ -757,7 +843,6 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                     .newInstance(Connections.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-//            Connections datasource = (Connections) jaxbUnmarshaller.unmarshal(new File("src/datasource.xml"));
             Connections datasource = (Connections) jaxbUnmarshaller.unmarshal(new File("src/main/resources/datasource.xml"));
 
             Datasource d = null;
@@ -776,6 +861,23 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
             RetriverAndConvertTask task = new RetriverAndConvertTask(token, domainName, functionName);
 
+            // Creating a button to cancel the execution of the task
+            Button btnClose = new Button("X");
+
+//            btnClose.setStyle("-fx-font: 8 arial; -fx-base: #b6e7c9;");
+            btnClose.setStyle("-fx-font: 8 arial;");
+            btnClose.setMaxSize(2, 2);
+
+            btnClose.setOnAction(e -> {
+                task.cancelProgress();
+            });
+
+            HBxPre.getChildren().addAll(btnClose);
+
+            // to disable the retriever button while is running the task
+            btnExecute.disableProperty().bind(task.runningProperty());
+
+            // bind the result obtained from the retriever task
             filterProgress.progressProperty().bind(task.progressProperty());
             task.messageProperty().addListener((w, o, n) -> {
                 txtSummary.clear();
@@ -790,6 +892,8 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                     }
 
                 }
+                // Removing the button after finishing the process
+                HBxPre.getChildren().remove(btnClose);
 
             });
 

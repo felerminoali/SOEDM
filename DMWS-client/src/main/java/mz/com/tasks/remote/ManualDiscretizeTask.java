@@ -16,7 +16,7 @@ import mz.com.wsweka.ElearningWekaWSService;
  *
  * @author Lenovo
  */
-public class ManualDiscretizeTask extends Task<List<String>> {
+public class ManualDiscretizeTask extends Task<List<String>> implements Cancelable{
     
      private String data;
     private String filter;
@@ -53,6 +53,13 @@ public class ManualDiscretizeTask extends Task<List<String>> {
             return null;
         }
 
+    }
+
+    @Override
+    public void cancelProgress() {
+        updateMessage("Process cancelled!");
+        updateProgress(0, 100);
+        cancel(true);
     }
     
 }

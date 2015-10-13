@@ -16,7 +16,7 @@ import mz.com.wsweka.ElearningWekaWSService;
  *
  * @author Lenovo
  */
-public class VisualizeTreeTask extends Task<List<String>> {
+public class VisualizeTreeTask extends Task<List<String>> implements Cancelable{
 
     
     private String data;
@@ -62,6 +62,13 @@ public class VisualizeTreeTask extends Task<List<String>> {
             cancel(true);
             return null;
         }
+    }
+
+     @Override
+    public void cancelProgress() {
+        updateMessage("Process cancelled!");
+        updateProgress(0, 100);
+        cancel(true);
     }
     
 }

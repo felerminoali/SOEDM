@@ -15,7 +15,7 @@ import mz.com.wsweka.ElearningWekaWSService;
  *
  * @author Lenovo
  */
-public class ClassifyTask extends Task<List<String>> {
+public class ClassifyTask extends Task<List<String>> implements Cancelable{
 
     private String data;
     private String classifier;
@@ -63,4 +63,10 @@ public class ClassifyTask extends Task<List<String>> {
 
     }
 
+    @Override
+    public void cancelProgress() {
+        updateMessage("Process cancelled!");
+        updateProgress(0, 100);
+        cancel(true);
+    }
 }

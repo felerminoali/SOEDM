@@ -10,17 +10,17 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.concurrent.Task;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Lenovo
  */
-public class TestConnectionTask extends Task<List<String>> {
+public class TestConnectionTask extends Task<List<String>> implements Cancelable {
 
     private String token;
     private String domainName;
@@ -65,6 +65,7 @@ public class TestConnectionTask extends Task<List<String>> {
 
             HttpURLConnection con = (HttpURLConnection) new URL(serverurl)
                     .openConnection();
+
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type",
                     "application/x-www-form-urlencoded");
@@ -72,66 +73,27 @@ public class TestConnectionTask extends Task<List<String>> {
             con.setDoOutput(true);
             con.setUseCaches(false);
             con.setDoInput(true);
+//            
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+
+//            
             wr.writeBytes(urlParameters);
             wr.flush();
             wr.close();
 
-            // Get Response
-            InputStream is = con.getInputStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-            String linha;
+            response.append("Connection successful");
+            updateProgress(0, 100);
 
-            long totalBytesRead = getTotalBytes();
-            long totalBytesReadNow = 0;
-            int progress = 0;
-
-            if (totalBytesRead > 0) {
-
-                while ((linha = rd.readLine()) != null) {
-
-                    response.append(linha);
-                    response.append('\r');
-                    response.append('\n');
-
-                    StringBuilder sb1n = new StringBuilder(linha);
-
-                    sb1n.reverse();
-
-                    String lineReversed = sb1n.toString();
-
-                    byte[] bytesReadNow = lineReversed.getBytes();
-
-                    for (int i = 0; i < bytesReadNow.length; i++) {
-                        totalBytesReadNow = totalBytesReadNow
-                                + bytesReadNow[i];
-
-                        if (totalBytesReadNow >= totalBytesRead * 0.01) {
-                            progress = progress + 1;
-                            totalBytesReadNow = 0;
-
-                            if (isCancelled()) {
-                                break;
-                            }
-
-                            updateProgress(progress, 100);
-                        }
-
-                    }
-                    Thread.sleep(0, 1);
-                }
-            }
-
-            rd.close();
         } catch (Exception ex) {
-            
+
+            updateMessage("Connection Failed! \n" + ex.getMessage());
             updateProgress(0, 100);
             cancel(true);
+            return null;
         }
-//        List<String> result = new ArrayList<>();
-//        result.add(response.toString());
+
         updateMessage(response.toString());
-       return new ArrayList<>();
+        return new ArrayList<>();
 
     }
 
@@ -196,6 +158,13 @@ public class TestConnectionTask extends Task<List<String>> {
             return 0;
         }
 
+    }
+
+    @Override
+    public void cancelProgress() {
+        updateMessage("Process cancelled!");
+        updateProgress(0, 100);
+        cancel(true);
     }
 
 }
