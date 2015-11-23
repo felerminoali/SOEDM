@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.view.AddConnectionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="539.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.com.view.AddConnectionController">
    <children>
       <VBox prefHeight="400.0" prefWidth="481.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,20 +19,22 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="150.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Connection Name" />
-                  <Label text="URL" GridPane.rowIndex="1" />
-                  <Label text="Token Key" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtConName" text="192.168.0.108:8282" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtUrl" text="http://192.168.0.108:8282/moodle-latest-27/moodle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtToken" text="9c4991bde66fe656ecc942d9b61e0f04" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextArea fx:id="txtConStatus" prefHeight="132.0" prefWidth="455.0" text="&#10;&#10;&#10;" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label text="URL" GridPane.rowIndex="2" />
+                  <Label text="Token Key" GridPane.rowIndex="3" />
+                  <TextField fx:id="txtConName" text="127.0.0.1:8282" GridPane.columnIndex="1" />
+                  <TextField fx:id="txtUrl" text="http://127.0.0.1:8282/moodle-latest-27/moodle" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtToken" text="9c4991bde66fe656ecc942d9b61e0f04" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextArea fx:id="txtConStatus" prefHeight="132.0" prefWidth="455.0" text="&#10;&#10;&#10;" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
                         <Button fx:id="btnTestCon" mnemonicParsing="false" onAction="#handleBtnTestConnection" text="Test Connection" />
                         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleBtnSave" text="Save" />
@@ -41,6 +43,10 @@
                         <Insets bottom="10.0" right="10.0" top="10.0" />
                      </padding>
                   </HBox>
+                  <TextField fx:id="txtFuncName" text="local_miningdata_get_students_data" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Function name" GridPane.rowIndex="4" />
+                  <ComboBox prefHeight="25.0" prefWidth="197.0" promptText="MOODLE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Node System" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

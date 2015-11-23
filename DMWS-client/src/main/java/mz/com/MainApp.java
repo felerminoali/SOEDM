@@ -5,7 +5,11 @@
  */
 package mz.com;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -14,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -65,15 +71,15 @@ public class MainApp extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
-            
-             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent e) {
                     Platform.exit();
                     System.exit(0);
                 }
             });
-            
+
             primaryStage.show();
 
         } catch (IOException e) {
@@ -134,10 +140,10 @@ public class MainApp extends Application {
             ChooserController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setWekaFilter(weka);
-            
+
             // FOR TEST 
             controller.setMainController(controllerMain);
-            
+
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
@@ -149,7 +155,35 @@ public class MainApp extends Application {
         }
     }
 
-      public boolean showClassifierChooser(Classifers weka) {
+    public boolean showFileChooser(String content) {
+
+        try {
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save");
+
+            fileChooser.getExtensionFilters().addAll(
+                    new ExtensionFilter("Text Files", "*.arff"),
+                    new ExtensionFilter("All Files", "*.*"));
+
+            File file = fileChooser.showSaveDialog(primaryStage);
+
+            if (file != null) {
+                FileWriter fileWriter = null;
+
+                fileWriter = new FileWriter(file);
+                fileWriter.write(content);
+                fileWriter.close();
+            }
+            return true;
+        } catch (IOException e) {
+//            Logger.getLogger(JavaFX_Text.class.getName()).log(Level.SEVERE, null, ex);
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showClassifierChooser(Classifers weka) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -169,10 +203,10 @@ public class MainApp extends Application {
             ChooserController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setWekaClassifier(weka);
-            
+
             // FOR TEST 
             controller.setMainController(controllerMain);
-            
+
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
@@ -183,8 +217,8 @@ public class MainApp extends Application {
             return false;
         }
     }
-      
-      public boolean showClusterChooser(Clusters weka) {
+
+    public boolean showClusterChooser(Clusters weka) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -204,10 +238,10 @@ public class MainApp extends Application {
             ChooserController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setWekaCluster(weka);
-            
+
             // FOR TEST 
             controller.setMainController(controllerMain);
-            
+
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
@@ -218,9 +252,8 @@ public class MainApp extends Application {
             return false;
         }
     }
-      
 
-       public boolean showAssociateChooser(Associations weka) {
+    public boolean showAssociateChooser(Associations weka) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -240,10 +273,10 @@ public class MainApp extends Application {
             ChooserController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setWekaAssociator(weka);
-            
+
             // FOR TEST 
             controller.setMainController(controllerMain);
-            
+
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
@@ -254,7 +287,7 @@ public class MainApp extends Application {
             return false;
         }
     }
-      
+
     /**
      * Returns the main stage.
      *
@@ -263,8 +296,8 @@ public class MainApp extends Application {
     public Stage getPrimaryStage() {
         return primaryStage;
     }
-    
-    public MainGUIController getMainGUIController(){
+
+    public MainGUIController getMainGUIController() {
         return this.controllerMain;
     }
 }

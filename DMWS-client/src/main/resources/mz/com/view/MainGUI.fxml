@@ -24,6 +24,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
+                              <ComboBox prefHeight="25.0" prefWidth="121.0" promptText="WEKA" />
                               <Button fx:id="btnChoose" mnemonicParsing="false" onAction="#handleBtnChooseFilter" text="Choose" />
                               <TextField fx:id="txtFilter" editable="false" prefHeight="25.0" prefWidth="373.0" promptText="None" HBox.hgrow="ALWAYS" />
                               <Button fx:id="btnApply" mnemonicParsing="false" onAction="#handleButtonApply" text="Apply" />
@@ -58,7 +59,7 @@
                         <Button disable="true" mnemonicParsing="false" text="View Data" />
                         <Button fx:id="btnExecute" disable="true" mnemonicParsing="false" onAction="#handleBtnExecute" text="Retrieve Data" />
                         <Button fx:id="btnUndo" disable="true" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBtnUndo" text="Undo" />
-                        <Button fx:id="btnUndo1" disable="true" layoutX="187.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBtnUndo" text="Save..." />
+                        <Button fx:id="btnSave" disable="true" layoutX="187.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBtnSave" text="Save..." />
                      </children>
                      <BorderPane.margin>
                         <Insets bottom="10.0" left="10.0" top="10.0" />

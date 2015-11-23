@@ -10,13 +10,18 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -54,6 +59,7 @@ import mz.com.myabstract.CallbackHistoryOutput;
 import mz.com.tasks.remote.AssociateTask;
 import mz.com.tasks.remote.ClassifyTask;
 import mz.com.tasks.remote.ClusterTask;
+import mz.com.tasks.remote.DefaultTask;
 import mz.com.tasks.remote.FilterTask;
 import mz.com.tasks.remote.ManualDiscretizeTask;
 import mz.com.tasks.remote.RetriverAndConvertTask;
@@ -87,6 +93,9 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     public Button btnApply;
 
     @FXML
+    public Button btnSave;
+
+    @FXML
     public Button btnUndo, btnClassStart, btnChooseCluster, btnClusStart, btnAssoStart;
 
     @FXML
@@ -115,6 +124,8 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     final ToggleGroup groupClassifierEvaluator = new ToggleGroup();
     final ToggleGroup groupClusterEvaluator = new ToggleGroup();
 
+    Task<List<String>> tasks = new DefaultTask();
+
     public MainGUIController() {
     }
 
@@ -123,19 +134,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
 
-        // treeCon selection model
-        treeCon.getSelectionModel().selectedItemProperty().addListener((v, old, newValue) -> {
+        bindTreeConnectionAndButtonExecute();
 
-            TreeItem<String> selectedItem = (TreeItem<String>) newValue;
-
-            if (selectedItem.isLeaf()) {
-                btnExecute.setDisable(false);
-            } else {
-                btnExecute.setDisable(true);
-            }
-        });
+        bindSaveAndTxtSummary();
 
         // classfier evaluation options
         txtCrossVal.textProperty().addListener(e -> {
@@ -145,8 +147,6 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             } else {
                 evalution = "";
             }
-
-//            System.out.println(evalution);
         });
 
         txtPercValClass.textProperty().addListener(e -> {
@@ -156,12 +156,9 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             } else {
                 evalution = "";
             }
-
-//            System.out.println(evalution);
         });
 
-        txtCrossVal.setText("10");
-        txtPercValClass.setText("66.0");
+        loadDefaultValue();
 
         radioCrossVal.setToggleGroup(groupClassifierEvaluator);
         radioParcValClass.setToggleGroup(groupClassifierEvaluator);
@@ -325,11 +322,61 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
         btnClassStart.disableProperty().bind(txtClassifier.textProperty().isEmpty());
         btnClusStart.disableProperty().bind(txtCluster.textProperty().isEmpty());
 
+        disableTabClosable();
+
+    }
+
+    private void bindSaveAndTxtSummary() {
+        // bind Save button
+
+        txtSummary.textProperty().addListener((v, old, newValue) -> {
+
+            String[] s = newValue.split("\\s");
+            if (s[0].equals("@relation")) {
+                btnSave.setDisable(Boolean.FALSE);
+            } else {
+                btnSave.setDisable(Boolean.TRUE);
+            }
+
+        });
+    }
+
+    private void disableTabClosable() {
         tabClassify.setClosable(false);
         tabCluster.setClosable(false);
         tabAssociator.setClosable(false);
         tabPrepro.setClosable(false);
+    }
 
+    private void loadDefaultValue() {
+        txtCrossVal.setText("10");
+        txtPercValClass.setText("66.0");
+    }
+
+    private void bindTreeConnectionAndButtonExecute() {
+        // TODO
+
+        BooleanProperty b = new SimpleBooleanProperty(Boolean.TRUE);
+        // treeCon selection model
+
+//        if (!treeCon.getSelectionModel().getSelectedItems().isEmpty()) {
+            treeCon.getSelectionModel().selectedItemProperty().addListener((v, old, newValue) -> {
+
+                TreeItem<String> selectedItem = (TreeItem<String>) newValue;
+
+                try {
+                    if (selectedItem.isLeaf()) {
+                        b.setValue(Boolean.FALSE);
+                    } else {
+                        b.setValue(Boolean.TRUE);
+                    }
+                } catch (Exception ex) {
+                    FXOptionPane.showConfirmDialog(mainApp.getPrimaryStage(), ex.getMessage(), "Error");
+                }
+
+            });
+//        }
+        btnExecute.disableProperty().bind(tasks.runningProperty().or(b));
     }
 
     public void setMainApp(MainApp mainApp) {
@@ -343,26 +390,6 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
         return this.mainApp;
     }
 
-    private boolean isNumeric(String value) {
-
-        try {
-            Integer.parseInt(value);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
-
-    private boolean isReal(String value) {
-        try {
-            Double.parseDouble(value);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     @FXML
     public void handleBtnAssoStart() {
 
@@ -374,7 +401,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
             task = new AssociateTask(data, associator);
 
-             // Creating a button to cancel the execution of the task
+            // Creating a button to cancel the execution of the task
             Button btnClose = new Button("X");
 
             btnClose.setStyle("-fx-font: 8 arial;");
@@ -388,15 +415,15 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
             // to disable the retriever button while is running the task
             btnAssoStart.disableProperty().bind(task.runningProperty());
-            
+
             this.assoProgress.progressProperty().bind(task.progressProperty());
             task.messageProperty().addListener((w, o, n) -> {
                 txtOutputAssociator.clear();
                 txtOutputAssociator.appendText(n + "\n");
                 this.assHistorys.add(new OutputHistory(n, associator, null));
                 this.listAssocScheme.getSelectionModel().selectLast();
-                
-                 HBxAss.getChildren().remove(btnClose);
+
+                HBxAss.getChildren().remove(btnClose);
             });
 
             new Thread(task).start();
@@ -442,7 +469,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                 txtOutputCluster.appendText(n + "\n");
                 this.clusHistorys.add(new OutputHistory(n, classifier, clusterEvaluation));
                 this.listClustScheme.getSelectionModel().selectLast();
-                
+
                 HBxClust.getChildren().remove(btnClose);
             });
 
@@ -727,6 +754,21 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     }
 
     @FXML
+    public void handleBtnSave() {
+
+        try {
+            boolean okClicked = mainApp.showFileChooser(this.dataList.get(dataList.size() - 1));
+
+            if (okClicked) {
+
+            }
+        } catch (Exception ex) {
+            FXOptionPane.showConfirmDialog(mainApp.getPrimaryStage(), ex.getMessage(), "Error");
+        }
+
+    }
+
+    @FXML
     public void handleButtonApply() {
         try {
             String args[] = txtFilter.getText().split("\\s");
@@ -859,8 +901,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
             String functionName = (String) d.getRemote().getFunction().get(0);
 
-            RetriverAndConvertTask task = new RetriverAndConvertTask(token, domainName, functionName);
+//            RetriverAndConvertTask task = new RetriverAndConvertTask(token, domainName, functionName);
+            tasks = new RetriverAndConvertTask(token, domainName, functionName);
 
+            // preventing duplicate threads
             // Creating a button to cancel the execution of the task
             Button btnClose = new Button("X");
 
@@ -869,17 +913,21 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             btnClose.setMaxSize(2, 2);
 
             btnClose.setOnAction(e -> {
-                task.cancelProgress();
+//                task.cancelProgress();
+                ((RetriverAndConvertTask) tasks).cancelProgress();
             });
 
             HBxPre.getChildren().addAll(btnClose);
 
             // to disable the retriever button while is running the task
-            btnExecute.disableProperty().bind(task.runningProperty());
+//            btnExecute.disableProperty().bind(task.runningProperty());
+            bindTreeConnectionAndButtonExecute();
 
             // bind the result obtained from the retriever task
-            filterProgress.progressProperty().bind(task.progressProperty());
-            task.messageProperty().addListener((w, o, n) -> {
+//            filterProgress.progressProperty().bind(task.progressProperty());
+            filterProgress.progressProperty().bind(((RetriverAndConvertTask) tasks).progressProperty());
+
+            ((RetriverAndConvertTask) tasks).messageProperty().addListener((w, o, n) -> {
                 txtSummary.clear();
                 txtSummary.appendText(n + "\n");
                 if (!n.isEmpty()) {
@@ -897,8 +945,9 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
             });
 
-            new Thread(task).start();
+            new Thread(((RetriverAndConvertTask) tasks)).start();
 
+//            btnExecute.disableProperty().unbind();
         } catch (Exception ex) {
             FXOptionPane.showConfirmDialog(this.mainApp.getPrimaryStage(), ex.getMessage(), "Error");
         }

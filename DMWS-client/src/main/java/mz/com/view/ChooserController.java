@@ -94,15 +94,21 @@ public class ChooserController implements Initializable {
             TreeItem<Object> root = new TreeItem<>();
             root.setExpanded(false);
 
+             // super node - tem ser aultomatizado
+            TreeItem<Object> root1 = makeBranch("Weka", root);
+            
             Filters filters = (Filters) weka;
             for (jaxb.weka.filters.Filters.Config f : filters.getConfig()) {
-                makeBranch(f, root);
+                // antes e depois
+//                makeBranch(f, root);
+                makeBranch(f, root1);
             }
 
             
             for(Strategy strategy: filters.getStrategy()){
             
-                     TreeItem<Object> strategyType = makeBranch(strategy, root);
+//                     TreeItem<Object> strategyType = makeBranch(strategy, root);
+                      TreeItem<Object> strategyType = makeBranch(strategy, root1);
                      
                      for(InputType inputType : strategy.getInputType()){
                          TreeItem<Object> inputTypeName = makeBranch(inputType, strategyType);
@@ -114,7 +120,8 @@ public class ChooserController implements Initializable {
             
             }
             // create tree
-            treeChooser.setRoot(root);
+//            treeChooser.setRoot(root);
+             treeChooser.setRoot(root);
             treeChooser.setShowRoot(false);
 
         } catch (Exception e) {
@@ -129,11 +136,14 @@ public class ChooserController implements Initializable {
 
             TreeItem<Object> root = new TreeItem<>();
             root.setExpanded(false);
+             // super node - tem ser aultomatizado
+            TreeItem<Object> root1 = makeBranch("Weka", root);
 
             Classifers classfiers = (Classifers) weka;
 
             for (Method method : classfiers.getMethod()) {
-                TreeItem<Object> methodName = makeBranch(method, root);
+//                TreeItem<Object> methodName = makeBranch(method, root);
+                TreeItem<Object> methodName = makeBranch(method, root1);
                 for (jaxb.weka.classifers.Classifers.Method.Config c : method.getConfig()) {
                     makeBranch(c, methodName);
                 }
@@ -156,11 +166,14 @@ public class ChooserController implements Initializable {
             TreeItem<Object> root = new TreeItem<>();
             root.setExpanded(false);
 
+             // super node - tem ser aultomatizado
+            TreeItem<Object> root1 = makeBranch("Weka", root);
+            
             Clusters clusters = (Clusters) weka;
 
-//            TreeItem<Object> bayes = makeBranch(clusters.get, root);
             for (jaxb.weka.cluster.Clusters.Config c : clusters.getConfig()) {
-                makeBranch(c, root);
+//                makeBranch(c, root);
+                makeBranch(c, root1);
             }
 
             // create tree
@@ -181,11 +194,14 @@ public class ChooserController implements Initializable {
             TreeItem<Object> root = new TreeItem<>();
             root.setExpanded(false);
 
+              // super node - tem ser aultomatizado
+            TreeItem<Object> root1 = makeBranch("Weka", root);
+            
             Associations associations = (Associations) weka;
 
-//            TreeItem<Object> bayes = makeBranch(clusters.get, root);
             for (jaxb.weka.associations.Associations.Config c : associations.getConfig()) {
-                makeBranch(c, root);
+//                makeBranch(c, root);
+                 makeBranch(c, root1);
             }
 
             // create tree

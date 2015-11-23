@@ -45,6 +45,9 @@ public class AddConnectionController implements Initializable {
 
     @FXML
     private TextField txtToken;
+    
+    @FXML
+    private TextField txtFuncName;
 
     @FXML
     private TextArea txtConStatus;
@@ -69,9 +72,10 @@ public class AddConnectionController implements Initializable {
 
         String token = this.txtToken.getText();
         String domainName = this.txtUrl.getText();
+        String funcName = this.txtFuncName.getText();
 
         try {
-            TestConnectionTask task = new TestConnectionTask(token, domainName);
+            TestConnectionTask task = new TestConnectionTask(token, domainName, funcName);
            
             progStatus.progressProperty().bind(task.progressProperty());
             task.messageProperty().addListener((w, o, n) -> {
@@ -110,7 +114,7 @@ public class AddConnectionController implements Initializable {
 
                 Connections.Datasource.Remote remote = new Connections.Datasource.Remote();
 
-                remote.getFunction().add("local_miningdata_get_students_data");
+                remote.getFunction().add(this.txtFuncName.getText());
                 dataSrc.setRemote(remote);
 
                 datasource.getDatasource().add(dataSrc);
@@ -156,6 +160,9 @@ public class AddConnectionController implements Initializable {
             txtConName.setText(this.dataSrc.getName());
             txtUrl.setText(this.dataSrc.getDomainName());
             txtToken.setText(this.dataSrc.getToken());
+            // pode ter ter uma ou mais funcoes
+            txtFuncName.setText(this.dataSrc.getRemote().getFunction().get(0));
+           
         }
     }
 
