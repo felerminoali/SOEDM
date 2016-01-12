@@ -25,460 +25,445 @@ import wsweka.core.converts.MoodleDataSource;
 
 public class MethodsUtility {
 
-	public String execute(String input) throws Exception {
+    public String execute(String input) throws Exception {
 
-		AbstractClassifier m_Classifier = null;
+        AbstractClassifier m_Classifier = null;
 
-		// the filter to use
-		Filter m_filter = null;
+        // the filter to use
+        Filter m_filter = null;
 
-		// the training file
-		String m_TrainingFile = null;
+        // the training file
+        String m_TrainingFile = null;
 
-		// the training instance
-		Instances m_Training = null;
+        // the training instance
+        Instances m_Training = null;
 
-		// for evaluating the classifier
-		Evaluation m_Evalution = null;
+        // for evaluating the classifier
+        Evaluation m_Evalution = null;
 
-		String classifier = "";
-		String filter = "";
-		String dataset = "";
+        String classifier = "";
+        String filter = "";
+        String dataset = "";
 
-		Vector<String> classifierOptions = new Vector<String>();
-		Vector<String> filterOptions = new Vector<String>();
+        Vector<String> classifierOptions = new Vector<String>();
+        Vector<String> filterOptions = new Vector<String>();
 
-		System.out.println(input);
+        System.out.println(input);
 
-		// splintting the input into six parts
-		String args[] = input.split("\\s");
-		for (int i = 0; i < args.length; i++) {
-			System.out.println(args[i]);
-		}
+        // splintting the input into six parts
+        String args[] = input.split("\\s");
+        for (int i = 0; i < args.length; i++) {
+            System.out.println(args[i]);
+        }
 
-		int i = 0;
+        int i = 0;
 
-		String current = "";
-		boolean newPart = false;
+        String current = "";
+        boolean newPart = false;
 
-		// to check if has an filter
-		boolean isFiltered = false;
+        // to check if has an filter
+        boolean isFiltered = false;
 
-		do {
+        do {
 
-			// determine part of command line
-			if (args[i].equals("CLASSIFIER")) {
-				System.out.println(args[i]);
-				current = args[i];
-				i++;
-				newPart = true;
-			} else if (args[i].equals("FILTER")) {
-				current = args[i];
-				i++;
-				newPart = true;
-			} else if (args[i].equals("DATASET")) {
-				current = args[i];
-				i++;
-				newPart = true;
-			}
+            // determine part of command line
+            if (args[i].equals("CLASSIFIER")) {
+                System.out.println(args[i]);
+                current = args[i];
+                i++;
+                newPart = true;
+            } else if (args[i].equals("FILTER")) {
+                current = args[i];
+                i++;
+                newPart = true;
+            } else if (args[i].equals("DATASET")) {
+                current = args[i];
+                i++;
+                newPart = true;
+            }
 
-			//
-			if (current.equals("CLASSIFIER")) {
-				if (newPart) {
-					classifier = args[i];
-				} else {
-					classifierOptions.add(args[i]);
-				}
+            //
+            if (current.equals("CLASSIFIER")) {
+                if (newPart) {
+                    classifier = args[i];
+                } else {
+                    classifierOptions.add(args[i]);
+                }
 
-			} else if (current.equals("FILTER")) {
-				if (newPart) {
-					filter = args[i];
-					isFiltered = true;
-				} else {
-					filterOptions.add(args[i]);
-				}
-			} else if (current.equals("DATASET")) {
-				if (newPart)
-					dataset = args[i];
-			}
+            } else if (current.equals("FILTER")) {
+                if (newPart) {
+                    filter = args[i];
+                    isFiltered = true;
+                } else {
+                    filterOptions.add(args[i]);
+                }
+            } else if (current.equals("DATASET")) {
+                if (newPart) {
+                    dataset = args[i];
+                }
+            }
 
-			// next parameter
-			i++;
-			newPart = false;
+            // next parameter
+            i++;
+            newPart = false;
 
-		} while (i < args.length);
+        } while (i < args.length);
 
-		m_Classifier = (AbstractClassifier) AbstractClassifier.forName(
-				classifier, (String[]) classifierOptions
-						.toArray(new String[classifierOptions.size()]));
+        m_Classifier = (AbstractClassifier) AbstractClassifier.forName(
+                classifier, (String[]) classifierOptions
+                .toArray(new String[classifierOptions.size()]));
 
 		// if there any filter
-		// if(!filter.isEmpty()){
-		// m_filter = (Filter) Class.forName(filter).newInstance();
-		//
-		// if (m_filter instanceof OptionHandler) {
-		// ((OptionHandler) m_filter).setOptions((String[]) filterOptions
-		// .toArray(new String[filterOptions.size()]));
-		// }
-		// }
-
-		// gathering data from path data source
-		m_TrainingFile = dataset;
-		m_Training = new weka.core.Instances(new BufferedReader(new FileReader(
-				m_TrainingFile)));
-		// class attribute
-		m_Training.setClassIndex(m_Training.numAttributes() - 1);
+        // if(!filter.isEmpty()){
+        // m_filter = (Filter) Class.forName(filter).newInstance();
+        //
+        // if (m_filter instanceof OptionHandler) {
+        // ((OptionHandler) m_filter).setOptions((String[]) filterOptions
+        // .toArray(new String[filterOptions.size()]));
+        // }
+        // }
+        // gathering data from path data source
+        m_TrainingFile = dataset;
+        m_Training = new weka.core.Instances(new BufferedReader(new FileReader(
+                m_TrainingFile)));
+        // class attribute
+        m_Training.setClassIndex(m_Training.numAttributes() - 1);
 
 		// run filter
+        if (isFiltered) {
+            m_filter = (Filter) Class.forName(filter).newInstance();
 
-		if (isFiltered) {
-			m_filter = (Filter) Class.forName(filter).newInstance();
-
-			if (m_filter instanceof OptionHandler) {
-				((OptionHandler) m_filter).setOptions((String[]) filterOptions
-						.toArray(new String[filterOptions.size()]));
-			}
-			m_filter.setInputFormat(m_Training);
-			Instances filtered = Filter.useFilter(m_Training, m_filter);
-			m_Training = filtered;
-		}
+            if (m_filter instanceof OptionHandler) {
+                ((OptionHandler) m_filter).setOptions((String[]) filterOptions
+                        .toArray(new String[filterOptions.size()]));
+            }
+            m_filter.setInputFormat(m_Training);
+            Instances filtered = Filter.useFilter(m_Training, m_filter);
+            m_Training = filtered;
+        }
 
 		// train classifier on complete file for tree
-		// m_Classifier.buildClassifier(filtered);
-		m_Classifier.buildClassifier(m_Training);
+        // m_Classifier.buildClassifier(filtered);
+        m_Classifier.buildClassifier(m_Training);
 
 		// 10fold CV with seed=1
-		// m_Evalution = new Evaluation(filtered);
-		m_Evalution = new Evaluation(m_Training);
+        // m_Evalution = new Evaluation(filtered);
+        m_Evalution = new Evaluation(m_Training);
 		// m_Evalution.crossValidateModel(m_Classifier, filtered, 10,
-		// m_Training.getRandomNumberGenerator(1));
-		m_Evalution.crossValidateModel(m_Classifier, m_Training, 10,
-				m_Training.getRandomNumberGenerator(1));
+        // m_Training.getRandomNumberGenerator(1));
+        m_Evalution.crossValidateModel(m_Classifier, m_Training, 10,
+                m_Training.getRandomNumberGenerator(1));
 
-		StringBuffer result;
+        StringBuffer result;
 
-		result = new StringBuffer();
-		result.append("Weka - Demo\n==================\n\n");
-		result.append("Classifier....: " + m_Classifier.getClass().getName()
-				+ " " + Utils.joinOptions(m_Classifier.getOptions()) + "\n");
+        result = new StringBuffer();
+        result.append("Weka - Demo\n==================\n\n");
+        result.append("Classifier....: " + m_Classifier.getClass().getName()
+                + " " + Utils.joinOptions(m_Classifier.getOptions()) + "\n");
 
-		if (isFiltered) {
-			if (m_filter instanceof OptionHandler) {
-				result.append("Filter....: "
-						+ m_filter.getClass().getName()
-						+ " "
-						+ Utils.joinOptions(((OptionHandler) m_filter)
-								.getOptions()) + "\n");
-			} else {
-				result.append("Filter....: " + m_filter.getClass().getName()
-						+ "\n");
-			}
-		}
+        if (isFiltered) {
+            if (m_filter instanceof OptionHandler) {
+                result.append("Filter....: "
+                        + m_filter.getClass().getName()
+                        + " "
+                        + Utils.joinOptions(((OptionHandler) m_filter)
+                                .getOptions()) + "\n");
+            } else {
+                result.append("Filter....: " + m_filter.getClass().getName()
+                        + "\n");
+            }
+        }
 
-		result.append("Training file: " + m_TrainingFile + "\n");
-		result.append("\n");
-		result.append(m_Classifier.toString() + "\n");
-		result.append(m_Evalution.toSummaryString() + "\n");
+        result.append("Training file: " + m_TrainingFile + "\n");
+        result.append("\n");
+        result.append(m_Classifier.toString() + "\n");
+        result.append(m_Evalution.toSummaryString() + "\n");
 
-		try {
-			result.append(m_Evalution.toMatrixString() + "\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result.toString();
-	}
+        try {
+            result.append(m_Evalution.toMatrixString() + "\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+    }
 
-	public String treeClassifer(String url) throws Exception {
+    public String treeClassifer(String url) throws Exception {
 
 		// load dataset
+        DataSource source = new DataSource(
+                "G:/desktop/dummy_data/interdata6/Summary_InterDataCategorical_TwoClass.arff");
+        Instances dataset = source.getDataSet();
+        // set class index to the last attribute
+        dataset.setClassIndex(dataset.numAttributes() - 1);
 
-		DataSource source = new DataSource(
-				"G:/desktop/dummy_data/interdata6/Summary_InterDataCategorical_TwoClass.arff");
-		Instances dataset = source.getDataSet();
-		// set class index to the last attribute
-		dataset.setClassIndex(dataset.numAttributes() - 1);
+        // the base classifier
+        J48 tree = new J48();
+        // the filter
+        Remove remove = new Remove();
+        // remove.setAttributeIndices("1");
+        String[] opts = new String[]{"-R", "1"};
+        // set the filter options
+        remove.setOptions(opts);
 
-		// the base classifier
-		J48 tree = new J48();
-		// the filter
-		Remove remove = new Remove();
-		// remove.setAttributeIndices("1");
-		String[] opts = new String[] { "-R", "1" };
-		// set the filter options
-		remove.setOptions(opts);
+        // Create the FilteredClassifier object
+        FilteredClassifier fc = new FilteredClassifier();
+        // specify filter
+        fc.setFilter(remove);
+        // specify base classifier
+        fc.setClassifier(tree);
+        // Build the meta-classifier
+        fc.buildClassifier(dataset);
 
-		// Create the FilteredClassifier object
-		FilteredClassifier fc = new FilteredClassifier();
-		// specify filter
-		fc.setFilter(remove);
-		// specify base classifier
-		fc.setClassifier(tree);
-		// Build the meta-classifier
-		fc.buildClassifier(dataset);
+        return tree.graph().toString();
 
-		return tree.graph().toString();
+        // System.out.println(tree.graph());
+    }
 
-		// System.out.println(tree.graph());
-	}
+    public String xmlToArrf(String xml) throws JAXBException {
 
-	public String xmlToArrf(String xml) throws JAXBException {
+        try {
 
-		try {
-			
-		
-		MoodleDataSource data = new MoodleDataSource(xml);
+            MoodleDataSource data = new MoodleDataSource(xml);
 
-		String result = data.getDataSet().toString();
+            String result = data.getDataSet().toString();
 
-		return result;
-		
-		} catch (Exception e) {
-			return e.getMessage();
-		}
-	}
+            return result;
 
-	public String executeTwo(String xml, String optTask) throws Exception {
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 
-		String result = "";
+    public String executeTwo(String xml, String optTask) throws Exception {
 
-		MoodleDataSource data = new MoodleDataSource(xml);
+        String result = "";
 
-		DataSet dataset = new DataSet(data.getDataSet());
+        MoodleDataSource data = new MoodleDataSource(xml);
 
-		TaskFactory taskFactory = new TaskFactory();
+        DataSet dataset = new DataSet(data.getDataSet());
 
-		// Factory pattern
-		Task task = taskFactory.createTask(optTask);
+        TaskFactory taskFactory = new TaskFactory();
 
-		// strategy pattern
-		dataset.setTask(task);
+        // Factory pattern
+        Task task = taskFactory.createTask(optTask);
 
-		if (task != null) {
-			result = dataset.TryToBuildModel();
-		}
+        // strategy pattern
+        dataset.setTask(task);
 
-		return result;
-	}
+        if (task != null) {
+            result = dataset.TryToBuildModel();
+        }
 
-	public String executeTwo(String xml, String optTask, String discritizeOpts)
-			throws Exception {
+        return result;
+    }
 
-		String result = "";
+    public String executeTwo(String xml, String optTask, String discritizeOpts)
+            throws Exception {
 
-		MoodleDataSource data = new MoodleDataSource(xml);
+        String result = "";
 
-		DataSet dataset = new DataSet(data.getDataSet());
+        MoodleDataSource data = new MoodleDataSource(xml);
 
-		// discretizing data
-		dataset.filter(discritizeOpts);
+        DataSet dataset = new DataSet(data.getDataSet());
 
-		// Factory pattern
-		TaskFactory taskFactory = new TaskFactory();
+        // discretizing data
+        dataset.filter(discritizeOpts);
+
+        // Factory pattern
+        TaskFactory taskFactory = new TaskFactory();
 		//
-		// Factory pattern: return class object according the options given
-		Task task = taskFactory.createTask(optTask);
-		//
-		dataset.setTask(task);
-		//
-		if (task != null) {
-			result = dataset.TryToBuildModel();
-		}
+        // Factory pattern: return class object according the options given
+        Task task = taskFactory.createTask(optTask);
+        //
+        dataset.setTask(task);
+        //
+        if (task != null) {
+            result = dataset.TryToBuildModel();
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	public String executeTo(String xml, String optTask, String discritizeOpts)
-			throws Exception {
-		String result = "";
+    public String executeTo(String xml, String optTask, String discritizeOpts)
+            throws Exception {
+        String result = "";
 
-		MoodleDataSource data = new MoodleDataSource(xml);
+        MoodleDataSource data = new MoodleDataSource(xml);
 
-		DataSet dataset = new DataSet(data.getDataSet());
+        DataSet dataset = new DataSet(data.getDataSet());
 
-		// discretizing data
-		dataset.manualDescritezation(discritizeOpts);
+        // discretizing data
+        dataset.manualDescritezation(discritizeOpts);
 
-		// Factory pattern
-		TaskFactory taskFactory = new TaskFactory();
+        // Factory pattern
+        TaskFactory taskFactory = new TaskFactory();
 
-		// Factory pattern: return class object according the options given
-		Task task = taskFactory.createTask(optTask);
-		//
-		dataset.setTask(task);
+        // Factory pattern: return class object according the options given
+        Task task = taskFactory.createTask(optTask);
+        //
+        dataset.setTask(task);
 
-		if (task != null) {
-			result = dataset.TryToBuildModel();
-		}
+        if (task != null) {
+            result = dataset.TryToBuildModel();
+        }
 
-		return result;
-	}
+        return result;
+    }
 
 	// ============================================================================
-	// Final web methods
+    // Final web methods
+    public String executeFilter(String arff, String filter) throws Exception {
+        String result = "";
 
-	public String executeFilter(String arff, String filter) throws Exception {
-		String result = "";
+        ArffDataSource data = new ArffDataSource(arff);
 
-		ArffDataSource data = new ArffDataSource(arff);
+        DataSet dataset = new DataSet(data.getDataset());
 
-		DataSet dataset = new DataSet(data.getDataset());
+        dataset.filter(filter);
 
-		dataset.filter(filter);
+        result = dataset.getInstances().toString();
+        return result;
 
-		result = dataset.getInstances().toString();
-		return result;
+    }
 
-	}
-	
 	// manual descriteze
+    public String executeManualDescritezation(String arff, String filter)
+            throws Exception {
+        String result = "";
 
-	public String executeManualDescritezation(String arff, String filter)
-			throws Exception {
-		String result = "";
+        ArffDataSource data = new ArffDataSource(arff);
 
-		ArffDataSource data = new ArffDataSource(arff);
+        DataSet dataset = new DataSet(data.getDataset());
 
-		DataSet dataset = new DataSet(data.getDataset());
+        dataset.manualDescritezation(filter);
 
-		dataset.manualDescritezation(filter);
+        result = dataset.getInstances().toString();
+        return result;
 
-		result = dataset.getInstances().toString();
-		return result;
-
-	}
+    }
 
 	// execute classifier
+    public String executeClassifier(String arff, String classifier,
+            String evaluation) throws Exception {
+        String optTask = "";
+        if (evaluation != null) {
+            optTask += "CLASSIFIER " + classifier + " TEST-OPTIONS " + evaluation;
+        } else {
+            optTask += "CLASSIFIER " + classifier;
 
-	public String executeClassifier(String arff, String classifier,
-			String evaluation) throws Exception {
-		String optTask = "";
-		if (evaluation != null) {
-			optTask += "CLASSIFIER " + classifier + " TEST-OPTIONS " + evaluation;
-		} else {
-			optTask += "CLASSIFIER " + classifier;
+        }
 
-		}
+        String result = "";
+        ArffDataSource data = new ArffDataSource(arff);
 
-		String result = "";
-		ArffDataSource data = new ArffDataSource(arff);
+        DataSet dataset = new DataSet(data.getDataset());
 
-		DataSet dataset = new DataSet(data.getDataset());
+        TaskFactory taskFactory = new TaskFactory();
 
-		TaskFactory taskFactory = new TaskFactory();
+        // Factory pattern
+        Task task = taskFactory.createTask(optTask);
 
-		// Factory pattern
-		Task task = taskFactory.createTask(optTask);
+        // strategy pattern
+        dataset.setTask(task);
 
-		// strategy pattern
-		dataset.setTask(task);
+        if (task != null) {
+            result = dataset.TryToBuildModel();
+        }
 
-		if (task != null) {
-			result = dataset.TryToBuildModel();
-		}
+        return result;
 
-		return result;
+    }
 
-	}
-	
-	
 	// execute cluster
+    public String executeCluster(String arff, String cluster,
+            String evaluation) throws Exception {
+        String optTask = "";
+        if (evaluation != null) {
+            optTask += "CLUSTER " + cluster + " TEST-OPTIONS " + evaluation;
+        } else {
+            optTask += "CLUSTER " + cluster;
 
-		public String executeCluster(String arff, String cluster,
-				String evaluation) throws Exception {
-			String optTask = "";
-			if (evaluation != null) {
-				optTask += "CLUSTER " + cluster + " TEST-OPTIONS " + evaluation;
-			} else {
-				optTask += "CLUSTER " + cluster;
+        }
 
-			}
+        String result = "";
+        ArffDataSource data = new ArffDataSource(arff);
 
-			String result = "";
-			ArffDataSource data = new ArffDataSource(arff);
+        DataSet dataset = new DataSet(data.getDataset());
 
-			DataSet dataset = new DataSet(data.getDataset());
+        TaskFactory taskFactory = new TaskFactory();
 
-			TaskFactory taskFactory = new TaskFactory();
+        // Factory pattern
+        Task task = taskFactory.createTask(optTask);
 
-			// Factory pattern
-			Task task = taskFactory.createTask(optTask);
+        // strategy pattern
+        dataset.setTask(task);
 
-			// strategy pattern
-			dataset.setTask(task);
+        if (task != null) {
+            result = dataset.TryToBuildModel();
+        }
 
-			if (task != null) {
-				result = dataset.TryToBuildModel();
-			}
+        return result;
 
-			return result;
+    }
 
-		}
-		
 		//  execute associate
-		
-		public String executeAssociate(String arff, String associator) throws Exception {
-			String optTask = "";
-		
-				optTask += "ASSOCIATION " + associator;
+    public String executeAssociate(String arff, String associator) throws Exception {
+        String optTask = "";
 
-			
+        optTask += "ASSOCIATION " + associator;
 
-			String result = "";
-			ArffDataSource data = new ArffDataSource(arff);
+        String result = "";
+        ArffDataSource data = new ArffDataSource(arff);
 
-			DataSet dataset = new DataSet(data.getDataset());
+        DataSet dataset = new DataSet(data.getDataset());
 
-			TaskFactory taskFactory = new TaskFactory();
+        TaskFactory taskFactory = new TaskFactory();
 
-			// Factory pattern
-			Task task = taskFactory.createTask(optTask);
+        // Factory pattern
+        Task task = taskFactory.createTask(optTask);
 
-			// strategy pattern
-			dataset.setTask(task);
+        // strategy pattern
+        dataset.setTask(task);
 
-			if (task != null) {
-				result = dataset.TryToBuildModel();
-			}
+        if (task != null) {
+            result = dataset.TryToBuildModel();
+        }
 
-			return result;
+        return result;
 
-		}
-		
-		
-		public String visualizeTreeGraph(String arff, String classifier,
-				String evaluation) throws Exception {
-			String optTask = "";
-			if (evaluation != null) {
-				optTask += "CLASSIFIER " + classifier + " TEST-OPTIONS " + evaluation;
-			} else {
-				optTask += "CLASSIFIER " + classifier;
+    }
 
-			}
+    public String visualizeTreeGraph(String arff, String classifier,
+            String evaluation) throws Exception {
+        String optTask = "";
+        if (evaluation != null) {
+            optTask += "CLASSIFIER " + classifier + " TEST-OPTIONS " + evaluation;
+        } else {
+            optTask += "CLASSIFIER " + classifier;
 
-			String result = "";
-			ArffDataSource data = new ArffDataSource(arff);
+        }
 
-			DataSet dataset = new DataSet(data.getDataset());
+        String result = "";
+        ArffDataSource data = new ArffDataSource(arff);
 
-			TaskFactory taskFactory = new TaskFactory();
+        DataSet dataset = new DataSet(data.getDataset());
 
-			// Factory pattern
-			Task task = taskFactory.createTask(optTask);
-			
+        TaskFactory taskFactory = new TaskFactory();
+
+        // Factory pattern
+        Task task = taskFactory.createTask(optTask);
+
 //			ClassificationTask c = (ClassificationTask) task;
+        // strategy pattern
+        dataset.setTask(task);
 
-			// strategy pattern
-			dataset.setTask(task);
+        if (task != null) {
+            result = dataset.TryVisualizeGraph();
+        }
 
-			if (task != null) {
-				result = dataset.TryVisualizeGraph();
-			}
+        System.out.println(result);
+        return result;
 
-			
-			System.out.println(result);
-			return result;
+    }
 
-		}
-		
-		
 }

@@ -62,6 +62,8 @@ public class TestConnectionTask extends Task<List<String>> implements Cancelable
             // Send request
             String serverurl = domainName + "/webservice/rest/server.php"
                     + "?wstoken=" + token + "&wsfunction=" + functionName;
+            
+            System.out.println(serverurl);
 
             HttpURLConnection con = (HttpURLConnection) new URL(serverurl)
                     .openConnection();
