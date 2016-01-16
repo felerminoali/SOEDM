@@ -24,7 +24,19 @@
     </properties>
 
     <build>
-
+        <resources>
+            <resource>
+                <targetPath>META-INF</targetPath>
+                <directory>src</directory>
+                <includes>
+                    <include>jax-ws-catalog.xml</include>
+                    <include>wsdl/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <finalName>DMWS-client</finalName>
 
         <plugins>
@@ -41,14 +53,17 @@
             </plugin>
             
 <!--            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1</version>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.3</version>
                 <configuration>
-                    <finalName>${project.artifactId}</finalName>
-                    <outputDirectory>${project.build.directory}/dist/bin</outputDirectory>
+                     Needed with JAXP 1.5 
+                    <vmArgs>
+                        <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                    </vmArgs>
                 </configuration>
             </plugin>-->
+            
             
             <plugin>
                 <groupId>com.zenjava</groupId>
@@ -58,7 +73,45 @@
                     <mainClass>mz.com.MainApp</mainClass>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_9876/elearningwekaws.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <packageName>wsweka</packageName>
+                            <wsdlLocation>http://localhost:9876/elearningwekaws?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/elearningwekaws.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-elearningwekaws</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.xml</groupId>
+                        <artifactId>webservices-api</artifactId>
+                        <version>2.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <sourceDestDir>${project.build.directory}/generated-sources/jaxws-wsimport</sourceDestDir>
+                    <xnocompile>true</xnocompile>
+                    <verbose>true</verbose>
+                    <extension>true</extension>
+                    <catalog>${basedir}/src/jax-ws-catalog.xml</catalog>
+                     <vmArgs>
+                        <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                    </vmArgs>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

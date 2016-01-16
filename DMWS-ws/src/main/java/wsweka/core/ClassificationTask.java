@@ -53,7 +53,7 @@ public class ClassificationTask extends Task {
             // the filter to use
             Filter m_filter = null;
 
-			// // the training file
+            // // the training file
             // String m_TrainingFile = null;
             // the training instance
             Instances m_Training = null;
@@ -67,13 +67,13 @@ public class ClassificationTask extends Task {
 
             // gathering data from path data source
             m_Training = instances;
-			// m_Training = new weka.core.Instances(new BufferedReader(new
+            // m_Training = new weka.core.Instances(new BufferedReader(new
             // FileReader(
             // "G:/OneDrive/Documentos/WekaDataset/iris.arff")));
             // class attribute
             m_Training.setClassIndex(m_Training.numAttributes() - 1);
 
-			// run filter
+            // run filter
             if (this.filter != null) {
                 m_filter = (Filter) Class.forName(this.filter).newInstance();
 
@@ -92,7 +92,10 @@ public class ClassificationTask extends Task {
 
             System.out.println(m_Training.toString());
 
-			// Evaluation Cross-validation or for given percentage split
+            // start time taken to build the model
+            long starttime = System.currentTimeMillis();
+
+            // Evaluation Cross-validation or for given percentage split
             // original dataset
             // into train and test sets
             if (this.evaluation != null) {
@@ -178,6 +181,11 @@ public class ClassificationTask extends Task {
                 m_Evalution.evaluateModel(m_Classifier, m_Training);
             }
 
+            // stop time taken to build the model
+            long stoptime = System.currentTimeMillis();
+            // total time taken to build the model
+            long elapsedtime = stoptime - starttime;
+
             StringBuffer result;
 
             result = new StringBuffer();
@@ -200,7 +208,7 @@ public class ClassificationTask extends Task {
             }
 
 			// result.append("Training file: " + m_TrainingFile + "\n");
-			// If is drawable tree 
+            // If is drawable tree 
 //			try {
 //				Drawable d = (Drawable) m_Classifier;
 //				result.append(d);
@@ -208,7 +216,7 @@ public class ClassificationTask extends Task {
 //			}
             result.append("\n");
             result.append(m_Classifier.toString() + "\n");
-
+            result.append("Time taken to build the model: " + elapsedtime +" milis seconds"+ "\n");
             try {
                 result.append(m_Evalution.toSummaryString() + "\n");
                 result.append(m_Evalution.toMatrixString() + "\n");
@@ -246,7 +254,7 @@ public class ClassificationTask extends Task {
             m_Training = instances;
             m_Training.setClassIndex(m_Training.numAttributes() - 1);
 
-			// run filter
+            // run filter
             if (this.filter != null) {
                 m_filter = (Filter) Class.forName(this.filter).newInstance();
 
@@ -264,7 +272,7 @@ public class ClassificationTask extends Task {
 
             System.out.println(m_Training.toString());
 
-			// Evaluation Cross-validation or for given percentage split
+            // Evaluation Cross-validation or for given percentage split
             // original dataset
             // into train and test sets
             if (this.evaluation != null) {

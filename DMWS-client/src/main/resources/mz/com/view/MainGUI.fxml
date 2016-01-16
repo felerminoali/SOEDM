@@ -20,7 +20,7 @@
                   </TreeView>
                </left>
                <center>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                  <VBox fx:id="vBoxPreResult" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                      <children>
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
@@ -34,6 +34,7 @@
                            </VBox.margin>
                         </HBox>
                         <TextArea fx:id="txtSummary" editable="false" VBox.vgrow="ALWAYS" />
+                        <TextField fx:id="txtTimeMilis" editable="false" />
                      </children>
                      <BorderPane.margin>
                         <Insets />

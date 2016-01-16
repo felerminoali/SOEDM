@@ -32,6 +32,7 @@ public class RetriverAndConvertTask extends Task<List<String>> implements Cancel
     private String restformat = "xml";
     private String functionName;
     private final String urlParameters = "Default, ";
+    private long timeMillis = 0;
 
     public RetriverAndConvertTask(String token, String domainName, String functionName) {
         this.token = token;
@@ -46,6 +47,9 @@ public class RetriverAndConvertTask extends Task<List<String>> implements Cancel
 
     @Override
     protected List<String> call() throws Exception {
+
+        long starttime = System.currentTimeMillis();
+
         StringBuilder response = new StringBuilder();
         StringBuilder error = new StringBuilder("Unsuccessful!");
         try {
@@ -128,6 +132,9 @@ public class RetriverAndConvertTask extends Task<List<String>> implements Cancel
             }
 
             rd.close();
+
+           
+
         } catch (IOException ex) {
 
 //            List<String> result = new ArrayList<>();
@@ -141,12 +148,23 @@ public class RetriverAndConvertTask extends Task<List<String>> implements Cancel
 
         String newData = "";
         try {
-            ElearningWekaWSService service = new ElearningWekaWSService();
 
+            ElearningWekaWSService service = new ElearningWekaWSService();
+            
             ElearningWekaWS port = service.getElearningWekaWSPort();
 
             newData = port.xmlToArrf(response.toString());
-        } catch (JAXBException_Exception e) {
+            
+             long stoptime = System.currentTimeMillis();
+            long elapsedtime = stoptime - starttime;
+
+            this.timeMillis = elapsedtime;
+
+            System.out.println(">>>>>>>>>>>>>>>>.1 elapsedtime = " + elapsedtime);
+            
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
 //            List<String> result = new ArrayList<>();
             error.append("\nFailed connect to the Weka Web service provider");
 //            result.add(error.toString());
@@ -235,4 +253,9 @@ public class RetriverAndConvertTask extends Task<List<String>> implements Cancel
         updateProgress(0, 100);
         cancel(true);
     }
+
+    public long getTimeMillis() {
+        return timeMillis;
+    }
+
 }

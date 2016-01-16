@@ -84,7 +84,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     public TextField txtCrossVal, txtPercValClass, txtPercValCluster;
 
     @FXML
-    public TextField txtFilter, txtClassifier, txtCluster, txtAssociator;
+    public TextField txtFilter, txtClassifier, txtCluster, txtAssociator, txtTimeMilis;
 
     @FXML
     public Button btnExecute;
@@ -109,6 +109,9 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
     @FXML
     private HBox HBxPre, HBxClass, HBxClust, HBxAss;
+
+    @FXML
+    private VBox vBoxPreResult;
 
     public String evalution = "";
     private String clusterEvaluation = "";
@@ -360,21 +363,21 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
         // treeCon selection model
 
 //        if (!treeCon.getSelectionModel().getSelectedItems().isEmpty()) {
-            treeCon.getSelectionModel().selectedItemProperty().addListener((v, old, newValue) -> {
+        treeCon.getSelectionModel().selectedItemProperty().addListener((v, old, newValue) -> {
 
-                TreeItem<String> selectedItem = (TreeItem<String>) newValue;
+            TreeItem<String> selectedItem = (TreeItem<String>) newValue;
 
-                try {
-                    if (selectedItem.isLeaf()) {
-                        b.setValue(Boolean.FALSE);
-                    } else {
-                        b.setValue(Boolean.TRUE);
-                    }
-                } catch (Exception ex) {
-                    FXOptionPane.showConfirmDialog(mainApp.getPrimaryStage(), ex.getMessage(), "Error");
+            try {
+                if (selectedItem.isLeaf()) {
+                    b.setValue(Boolean.FALSE);
+                } else {
+                    b.setValue(Boolean.TRUE);
                 }
+            } catch (Exception ex) {
+                FXOptionPane.showConfirmDialog(mainApp.getPrimaryStage(), ex.getMessage(), "Error");
+            }
 
-            });
+        });
 //        }
         btnExecute.disableProperty().bind(tasks.runningProperty().or(b));
     }
@@ -873,7 +876,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     public void handleBtnExecute() {
 
         try {
-
+            // clear time text field
+            txtTimeMilis.clear();
+            
+            
             String ConnName = "";
 
             for (TreeItem item : this.treeCon.getSelectionModel().getSelectedItems()) {
@@ -940,12 +946,18 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                     }
 
                 }
+
+                txtTimeMilis.setText("Time taken to collect the data: " + ((RetriverAndConvertTask) tasks).getTimeMillis() + " millis seconds (ms)");
+
+//                System.out.println(">>>>>>>>>>>>>>>>.3 elapsedtime = " + ((RetriverAndConvertTask) tasks).getTimeMillis());
                 // Removing the button after finishing the process
                 HBxPre.getChildren().remove(btnClose);
 
             });
 
             new Thread(((RetriverAndConvertTask) tasks)).start();
+
+            System.out.println(">>>>>>>>>>>>>>>>.2 elapsedtime = " + ((RetriverAndConvertTask) tasks).getTimeMillis());
 
 //            btnExecute.disableProperty().unbind();
         } catch (Exception ex) {

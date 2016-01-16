@@ -10,101 +10,110 @@ import weka.filters.Filter;
 
 public class AssociationTask extends Task {
 
-	private String associator = null;
-	private String filter = null;
+    private String associator = null;
+    private String filter = null;
 
-	private Vector<String> AssociationOptions = new Vector<String>();
-	private Vector<String> filterOptions = new Vector<String>();
+    private Vector<String> AssociationOptions = new Vector<String>();
+    private Vector<String> filterOptions = new Vector<String>();
 
-	public AssociationTask() {
-	}
+    public AssociationTask() {
+    }
 
-	public AssociationTask(String associator,
-			Vector<String> AssociationOptions, String filter,
-			Vector<String> filterOptions) {
-		this.associator = associator;
-		this.AssociationOptions = AssociationOptions;
-		this.filter = filter;
-		this.filterOptions = filterOptions;
-	}
+    public AssociationTask(String associator,
+            Vector<String> AssociationOptions, String filter,
+            Vector<String> filterOptions) {
+        this.associator = associator;
+        this.AssociationOptions = AssociationOptions;
+        this.filter = filter;
+        this.filterOptions = filterOptions;
+    }
 
-	public AssociationTask(String associator, Vector<String> AssociationOptions) {
-		this.associator = associator;
-		this.AssociationOptions = AssociationOptions;
+    public AssociationTask(String associator, Vector<String> AssociationOptions) {
+        this.associator = associator;
+        this.AssociationOptions = AssociationOptions;
 
-	}
+    }
 
-	@Override
-	public String buildModel(Instances instances) throws Exception {
+    @Override
+    public String buildModel(Instances instances) throws Exception {
 
-		try {
+        try {
 
-			AbstractAssociator association = null;
+            AbstractAssociator association = null;
 
-			// the filter to use
-			Filter m_filter = null;
+            // the filter to use
+            Filter m_filter = null;
 
-			// the training instance
-			Instances m_Training = null;
+            // the training instance
+            Instances m_Training = null;
 
-			association = (AbstractAssociator) AbstractAssociator
-					.forName(this.associator,
-							(String[]) this.AssociationOptions
-									.toArray(new String[this.AssociationOptions
-											.size()]));
+            association = (AbstractAssociator) AbstractAssociator
+                    .forName(this.associator,
+                            (String[]) this.AssociationOptions
+                            .toArray(new String[this.AssociationOptions
+                                    .size()]));
 
-			// gathering data from path data source
-			m_Training = instances;
+            // gathering data from path data source
+            m_Training = instances;
 
-			if (this.filter != null) {
-				m_filter = (Filter) Class.forName(this.filter).newInstance();
+            if (this.filter != null) {
+                m_filter = (Filter) Class.forName(this.filter).newInstance();
 
-				if (m_filter instanceof OptionHandler) {
-					((OptionHandler) m_filter)
-							.setOptions((String[]) this.filterOptions
-									.toArray(new String[this.filterOptions
-											.size()]));
-				}
-				m_filter.setInputFormat(m_Training);
-				Instances filtered = Filter.useFilter(m_Training, m_filter);
-				m_Training = filtered;
-			}
+                if (m_filter instanceof OptionHandler) {
+                    ((OptionHandler) m_filter)
+                            .setOptions((String[]) this.filterOptions
+                                    .toArray(new String[this.filterOptions
+                                            .size()]));
+                }
+                m_filter.setInputFormat(m_Training);
+                Instances filtered = Filter.useFilter(m_Training, m_filter);
+                m_Training = filtered;
+            }
 
-			System.out.println(m_Training.toString());
+            System.out.println(m_Training.toString());
 
-			association.buildAssociations(m_Training);
+            // start time taken to build the model
+            long starttime = System.currentTimeMillis();
 
-			StringBuffer result = new StringBuffer("");
+            association.buildAssociations(m_Training);
 
-			result.append("Weka - Association Task\n==================\n\n");
+            // stop time taken to build the model
+            long stoptime = System.currentTimeMillis();
+            // total time taken to build the model
+            long elapsedtime = stoptime - starttime;
 
-			result.append("Associator....: "
-					+ association.getClass().getName()
-					+ " "
-					+ Utils.joinOptions(((OptionHandler) association)
-							.getOptions()) + "\n");
+            StringBuffer result = new StringBuffer("");
 
-			if (filter != null) {
-				if (m_filter instanceof OptionHandler) {
-					result.append("Filter....: "
-							+ m_filter.getClass().getName()
-							+ " "
-							+ Utils.joinOptions(((OptionHandler) m_filter)
-									.getOptions()) + "\n");
-				} else {
-					result.append("Filter....: "
-							+ m_filter.getClass().getName() + "\n");
-				}
-			}
+            result.append("Weka - Association Task\n==================\n\n");
 
-			// result.append("Training file: " + m_TrainingFile + "\n");
-			result.append("\n");
-			result.append(association.toString() + "\n");
-			return result.toString();
+            result.append("Associator....: "
+                    + association.getClass().getName()
+                    + " "
+                    + Utils.joinOptions(((OptionHandler) association)
+                            .getOptions()) + "\n");
 
-		} catch (Exception e) {
-			return e.getMessage();
-		}
-	}
+            if (filter != null) {
+                if (m_filter instanceof OptionHandler) {
+                    result.append("Filter....: "
+                            + m_filter.getClass().getName()
+                            + " "
+                            + Utils.joinOptions(((OptionHandler) m_filter)
+                                    .getOptions()) + "\n");
+                } else {
+                    result.append("Filter....: "
+                            + m_filter.getClass().getName() + "\n");
+                }
+            }
+
+            // result.append("Training file: " + m_TrainingFile + "\n");
+            result.append("\n");
+            result.append(association.toString() + "\n");
+            result.append("Time taken to build the model: " + elapsedtime + " milis seconds" + "\n");
+            return result.toString();
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 
 }
