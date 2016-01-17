@@ -100,7 +100,9 @@ public class ClassificationTask extends Task {
             // into train and test sets
             if (this.evaluation != null) {
 
-                if (this.evaluation.equals("cross-validation")) {
+                if (this.evaluation.equals("cv")) {
+                    
+                     System.out.println("\n\n\n\\t cross val \n\n\n");
 
                     int i = 0;
                     int kfolds = 10;
@@ -126,7 +128,9 @@ public class ClassificationTask extends Task {
                     m_Evalution.crossValidateModel(m_Classifier, m_Training,
                             kfolds, m_Training.getRandomNumberGenerator(seed));
 
-                } else if (this.evaluation.equals("cv-split")) {
+                } else if (this.evaluation.equals("p-split")) {
+                    
+                    System.out.println("\n\n\n\\t p-split \n\n\n");
                     int i = 0;
                     double percnt = 66.0;
                     int seed = 1;
@@ -172,6 +176,7 @@ public class ClassificationTask extends Task {
 
             } else { // default
 
+                System.out.println("\n\n\n\\t full train \n\n\n");
                 // Evaluation on training set
                 m_Classifier.buildClassifier(m_Training);
                 // 10fold CV with seed=1 will be the default evaluation method
@@ -216,7 +221,7 @@ public class ClassificationTask extends Task {
 //			}
             result.append("\n");
             result.append(m_Classifier.toString() + "\n");
-            result.append("Time taken to build the model: " + elapsedtime +" milis seconds"+ "\n");
+            result.append("Time taken to build the model: " + elapsedtime +" miliseconds"+ "\n");
             try {
                 result.append(m_Evalution.toSummaryString() + "\n");
                 result.append(m_Evalution.toMatrixString() + "\n");
@@ -277,7 +282,7 @@ public class ClassificationTask extends Task {
             // into train and test sets
             if (this.evaluation != null) {
 
-                if (this.evaluation.equals("cross-validation")) {
+                if (this.evaluation.equals("cv")) {
 
                     int i = 0;
                     int kfolds = 10;
@@ -303,7 +308,7 @@ public class ClassificationTask extends Task {
                     m_Evalution.crossValidateModel(m_Classifier, m_Training,
                             kfolds, m_Training.getRandomNumberGenerator(seed));
 
-                } else if (this.evaluation.equals("cv-split")) {
+                } else if (this.evaluation.equals("p-split")) {
                     int i = 0;
                     double percnt = 66.0;
                     int seed = 1;

@@ -108,7 +108,7 @@ public class AssociationTask extends Task {
             // result.append("Training file: " + m_TrainingFile + "\n");
             result.append("\n");
             result.append(association.toString() + "\n");
-            result.append("Time taken to build the model: " + elapsedtime + " milis seconds" + "\n");
+            result.append("Time taken to build the model: " + elapsedtime + " miliseconds" + "\n");
             return result.toString();
 
         } catch (Exception e) {

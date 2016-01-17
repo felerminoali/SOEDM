@@ -146,7 +146,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
         txtCrossVal.textProperty().addListener(e -> {
             evalution = "";
             if (!txtCrossVal.getText().isEmpty()) {
-                evalution += "cross-validation -f " + txtCrossVal.getText() + " -S 1";
+                evalution += "cv -f " + txtCrossVal.getText() + " -S 1";
             } else {
                 evalution = "";
             }
@@ -155,7 +155,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
         txtPercValClass.textProperty().addListener(e -> {
             evalution = "";
             if (!txtPercValClass.getText().isEmpty()) {
-                evalution += "cv-split -Z " + Double.parseDouble(txtPercValClass.getText()) + " -S 1";
+                evalution += "p-split -Z " + Double.parseDouble(txtPercValClass.getText()) + " -S 1";
             } else {
                 evalution = "";
             }
@@ -188,7 +188,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
         txtPercValCluster.textProperty().addListener(e -> {
             clusterEvaluation = "";
             if (!txtPercValCluster.getText().isEmpty()) {
-                clusterEvaluation += "cv-split -Z " + Double.parseDouble(txtPercValCluster.getText()) + " -S 1";
+                clusterEvaluation += "p-split -Z " + Double.parseDouble(txtPercValCluster.getText()) + " -S 1";
             } else {
                 clusterEvaluation = "";
             }
@@ -208,14 +208,14 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                 if (chk == radioCrossVal) {
 
                     if (!txtCrossVal.getText().isEmpty()) {
-                        evalution += "cross-validation -f " + txtCrossVal.getText() + " -S 1";
+                        evalution += "cv -f " + txtCrossVal.getText() + " -S 1";
                     } else {
                         evalution = "";
                     }
 
                 } else if (chk == radioParcValClass) {
                     if (!txtPercValClass.getText().isEmpty()) {
-                        evalution += "cv-split -Z " + Double.parseDouble(txtPercValClass.getText()) + " -S 1";
+                        evalution += "p-split -Z " + Double.parseDouble(txtPercValClass.getText()) + " -S 1";
                     } else {
                         evalution = "";
                     }
@@ -233,7 +233,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                 clusterEvaluation = "";
                 if (chk == radioParcValClust) {
                     if (!txtPercValCluster.getText().isEmpty()) {
-                        clusterEvaluation += "cv-split -Z " + Double.parseDouble(txtPercValCluster.getText()) + " -S 1";
+                        clusterEvaluation += "p-split -Z " + Double.parseDouble(txtPercValCluster.getText()) + " -S 1";
                     } else {
                         clusterEvaluation = "";
                     }
@@ -497,6 +497,8 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             } else {
                 task = new ClassifyTask(data, classifier, evalution);
             }
+            
+           
 
             // Creating a button to cancel the execution of the task
             Button btnClose = new Button("X");
@@ -947,7 +949,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
                 }
 
-                txtTimeMilis.setText("Time taken to collect the data: " + ((RetriverAndConvertTask) tasks).getTimeMillis() + " millis seconds (ms)");
+                txtTimeMilis.setText("Time taken to collect the data: " + ((RetriverAndConvertTask) tasks).getTimeMillis() + " milliseconds (ms)");
 
 //                System.out.println(">>>>>>>>>>>>>>>>.3 elapsedtime = " + ((RetriverAndConvertTask) tasks).getTimeMillis());
                 // Removing the button after finishing the process

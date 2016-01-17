@@ -90,7 +90,7 @@ public class ClusterTask extends Task {
             // into train and test sets
             if (this.evaluation != null) {
 
-                if (this.evaluation.equals("cv-split")) {
+                if (this.evaluation.equals("p-split")) {
                     int i = 0;
                     double percnt = 66.0;
                     int seed = 1;
@@ -174,7 +174,7 @@ public class ClusterTask extends Task {
             // result.append("Training file: " + m_TrainingFile + "\n");
             result.append("\n");
             result.append(cluster.toString() + "\n");
-            result.append("Time taken to build the model: " + elapsedtime + " milis seconds" + "\n");
+            result.append("Time taken to build the model: " + elapsedtime + " miliseconds" + "\n");
             try {
                 result.append(m_Evalution.clusterResultsToString() + "\n");
             } catch (Exception e) {

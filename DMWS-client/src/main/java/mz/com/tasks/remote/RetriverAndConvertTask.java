@@ -160,7 +160,6 @@ public class RetriverAndConvertTask extends Task<List<String>> implements Cancel
 
             this.timeMillis = elapsedtime;
 
-            System.out.println(">>>>>>>>>>>>>>>>.1 elapsedtime = " + elapsedtime);
             
             
         } catch (Exception e) {
