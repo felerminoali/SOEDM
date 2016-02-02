@@ -8,4 +8,20 @@
             <function>local_miningdata_get_students_data</function>
         </remote>
     </datasource>
+    <datasource>
+        <name>127.0.t.1:8282</name>
+        <domainName>http://127.8.0.1:8282/moodle-latest-27/moodle</domainName>
+        <token>9c4991bde66fe656ecc942d9b61e0f04</token>
+        <remote>
+            <function>local_miningdata_get_students_data</function>
+        </remote>
+    </datasource>
+    <datasource>
+        <name>127.0.0.1:8282::1000</name>
+        <domainName>http://127.0.0.1:8282/moodle-latest-27-1000/moodle</domainName>
+        <token>9c4991bde66fe656ecc942d9b61e0f04</token>
+        <remote>
+            <function>local_miningdata_get_students_data</function>
+        </remote>
+    </datasource>
 </connections>

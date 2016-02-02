@@ -33,8 +33,12 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <TextArea fx:id="txtSummary" editable="false" VBox.vgrow="ALWAYS" />
-                        <TextField fx:id="txtTimeMilis" editable="false" />
+                        <HBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <TextArea fx:id="txtSummary" editable="false" prefHeight="341.0" prefWidth="446.0" HBox.hgrow="ALWAYS" />
+                              <ListView fx:id="listDataCollected" prefHeight="337.0" prefWidth="236.0" HBox.hgrow="NEVER" />
+                           </children>
+                        </HBox>
                      </children>
                      <BorderPane.margin>
                         <Insets />
@@ -59,7 +63,7 @@
                      <children>
                         <Button disable="true" mnemonicParsing="false" text="View Data" />
                         <Button fx:id="btnExecute" disable="true" mnemonicParsing="false" onAction="#handleBtnExecute" text="Retrieve Data" />
-                        <Button fx:id="btnUndo" disable="true" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBtnUndo" text="Undo" />
+                        <Button fx:id="btnUndo" disable="true" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Undo" />
                         <Button fx:id="btnSave" disable="true" layoutX="187.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBtnSave" text="Save..." />
                      </children>
                      <BorderPane.margin>

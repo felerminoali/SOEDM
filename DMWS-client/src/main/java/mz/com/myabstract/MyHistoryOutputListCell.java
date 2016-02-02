@@ -144,7 +144,9 @@ public class MyHistoryOutputListCell extends ListCell<OutputHistory> {
 
                                             try {
                                               
-                                                String data = mainGUIController.dataList.get(mainGUIController.dataList.size() - 1);
+//                                                String data = mainGUIController.dataList.get(mainGUIController.dataList.size() - 1);
+                                                // new code = no more undo
+                                                String data = mainGUIController.txtSummary.getText();
                                                 OutputHistory out = getItem();
                                                 String classifier = out.getTask();
                                                 String evaluation = out.getEvaluation();
@@ -198,7 +200,10 @@ public class MyHistoryOutputListCell extends ListCell<OutputHistory> {
                                             try {
 
                                                
-                                                String data = mainGUIController.dataList.get(mainGUIController.dataList.size() - 1);
+//                                                String data = mainGUIController.dataList.get(mainGUIController.dataList.size() - 1);
+                                                 // new code = no more undo
+                                                String data = mainGUIController.txtSummary.getText();
+                                                
                                                 OutputHistory out = getItem();
                                                 String classifier = out.getTask();
                                                 String evaluation = out.getEvaluation();

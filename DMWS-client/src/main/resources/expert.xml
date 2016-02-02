@@ -9,17 +9,97 @@
     <name>Expert System</name>
     <confidence>50</confidence>
     <attribute>
-        <id>12</id>
+        <id>114</id>
         <type>A</type>
-        <name>dsds</name>
+        <name>n_assign_fail</name>
         <attribute>
-            <id>16</id>
+            <id>124</id>
             <type>V</type>
-            <name>fsfsfs</name>
+            <name>low</name>
             <attribute>
-                <id>26</id>
+                <id>151</id>
+                <type>A</type>
+                <name>n_assign_pass</name>
+                <attribute>
+                    <id>163</id>
+                    <type>V</type>
+                    <name>low</name>
+                    <attribute>
+                        <id>177</id>
+                        <type>C</type>
+                        <name>FAIL</name>
+                    </attribute>
+                </attribute>
+                <attribute>
+                    <id>231</id>
+                    <type>V</type>
+                    <name>medium</name>
+                    <attribute>
+                        <id>249</id>
+                        <type>C</type>
+                        <name>FAIL</name>
+                    </attribute>
+                </attribute>
+                <attribute>
+                    <id>269</id>
+                    <type>V</type>
+                    <name>high</name>
+                    <attribute>
+                        <id>291</id>
+                        <type>C</type>
+                        <name>PASS</name>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </attribute>
+        <attribute>
+            <id>133</id>
+            <type>V</type>
+            <name>medium</name>
+            <attribute>
+                <id>315</id>
+                <type>A</type>
+                <name>n_quiz</name>
+                <attribute>
+                    <id>341</id>
+                    <type>V</type>
+                    <name>low</name>
+                    <attribute>
+                        <id>369</id>
+                        <type>C</type>
+                        <name>PASS</name>
+                    </attribute>
+                </attribute>
+                <attribute>
+                    <id>399</id>
+                    <type>V</type>
+                    <name>medium</name>
+                    <attribute>
+                        <id>465</id>
+                        <type>C</type>
+                        <name>FAIL</name>
+                    </attribute>
+                </attribute>
+                <attribute>
+                    <id>499</id>
+                    <type>V</type>
+                    <name>high</name>
+                    <attribute>
+                        <id>535</id>
+                        <type>C</type>
+                        <name>PASS</name>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </attribute>
+        <attribute>
+            <id>141</id>
+            <type>V</type>
+            <name>high</name>
+            <attribute>
+                <id>573</id>
                 <type>C</type>
-                <name>dgdgdg</name>
+                <name>FAIL</name>
             </attribute>
         </attribute>
     </attribute>

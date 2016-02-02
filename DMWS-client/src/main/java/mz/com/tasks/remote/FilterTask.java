@@ -19,6 +19,7 @@ public class FilterTask extends Task<List<String>> implements Cancelable {
 
     private String data;
     private String filter;
+    private long timeMillis = 0;
 
     public FilterTask(String data, String filter) {
         this.data = data;
@@ -28,6 +29,7 @@ public class FilterTask extends Task<List<String>> implements Cancelable {
     @Override
     protected List<String> call() throws Exception {
 
+        long starttime = System.currentTimeMillis();
         updateProgress(-1.0, 100);
         try {
 
@@ -43,6 +45,10 @@ public class FilterTask extends Task<List<String>> implements Cancelable {
             updateMessage(newData);
             updateProgress(0, 100);
 
+            long stoptime = System.currentTimeMillis();
+            long elapsedtime = stoptime - starttime;
+            this.timeMillis = elapsedtime;
+            
             return new ArrayList<>();
         } catch (Exception e) {
 
@@ -59,6 +65,10 @@ public class FilterTask extends Task<List<String>> implements Cancelable {
         updateMessage("Process cancelled!");
         updateProgress(0, 100);
         cancel(true);
+    }
+
+    public long getTimeMillis() {
+        return timeMillis;
     }
 
 }

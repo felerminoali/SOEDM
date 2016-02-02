@@ -20,7 +20,7 @@ public class ManualDiscretizeTask extends Task<List<String>> implements Cancelab
     
      private String data;
     private String filter;
-
+ private long timeMillis = 0;
     
      public ManualDiscretizeTask(String data, String filter) {
         this.data = data;
@@ -29,6 +29,7 @@ public class ManualDiscretizeTask extends Task<List<String>> implements Cancelab
     @Override
     protected List<String> call() throws Exception {
         
+         long starttime = System.currentTimeMillis();
           updateProgress(-1.0, 100);
         try {
 
@@ -43,6 +44,11 @@ public class ManualDiscretizeTask extends Task<List<String>> implements Cancelab
 //            result.add(newData);
             updateMessage(newData); 
             updateProgress(0, 100);
+            
+             long stoptime = System.currentTimeMillis();
+            long elapsedtime = stoptime - starttime;
+
+            this.timeMillis = elapsedtime;
 
            return new ArrayList<>();
         } catch (Exception e) {
@@ -52,6 +58,8 @@ public class ManualDiscretizeTask extends Task<List<String>> implements Cancelab
             cancel(true);
             return null;
         }
+        
+        
 
     }
 
@@ -60,6 +68,10 @@ public class ManualDiscretizeTask extends Task<List<String>> implements Cancelab
         updateMessage("Process cancelled!");
         updateProgress(0, 100);
         cancel(true);
+    }
+    
+     public long getTimeMillis() {
+        return timeMillis;
     }
     
 }

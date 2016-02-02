@@ -53,6 +53,7 @@ import jaxb.weka.classifers.Classifers;
 import jaxb.weka.cluster.Clusters;
 import jaxb.weka.filters.Filters;
 import mz.com.MainApp;
+import mz.com.model.DataOutputHistory;
 import mz.com.model.OutputHistory;
 import mz.com.myabstract.CallbackCustom;
 import mz.com.myabstract.CallbackHistoryOutput;
@@ -75,7 +76,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     private TreeView<String> treeCon;
 
     @FXML
-    private ListView listClassScheme, listClustScheme, listAssocScheme;
+    private ListView listClassScheme, listClustScheme, listAssocScheme, listDataCollected;
 
     @FXML
     public TextArea txtSummary, txtOutputClass, txtOutputCluster, txtOutputAssociator;
@@ -84,7 +85,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     public TextField txtCrossVal, txtPercValClass, txtPercValCluster;
 
     @FXML
-    public TextField txtFilter, txtClassifier, txtCluster, txtAssociator, txtTimeMilis;
+    public TextField txtFilter, txtClassifier, txtCluster, txtAssociator;
 
     @FXML
     public Button btnExecute;
@@ -96,7 +97,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     public Button btnSave;
 
     @FXML
-    public Button btnUndo, btnClassStart, btnChooseCluster, btnClusStart, btnAssoStart;
+    public Button btnClassStart, btnChooseCluster, btnClusStart, btnAssoStart;
 
     @FXML
     public Tab tabPrepro, tabClassify, tabCluster, tabAssociator;
@@ -119,10 +120,13 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     // Reference to the main application.
     private MainApp mainApp;
 
-    public ListProperty<String> dataList = new SimpleListProperty<>(FXCollections.<String>observableArrayList());
+//    public ListProperty<String> dataList = new SimpleListProperty<>(FXCollections.<String>observableArrayList());
     private ListProperty<OutputHistory> classifierHistorys = new SimpleListProperty<>(FXCollections.<OutputHistory>observableArrayList());
     private ListProperty<OutputHistory> clusHistorys = new SimpleListProperty<>(FXCollections.<OutputHistory>observableArrayList());
     private ListProperty<OutputHistory> assHistorys = new SimpleListProperty<>(FXCollections.<OutputHistory>observableArrayList());
+
+    // collected data list output
+    private ListProperty<DataOutputHistory> dataCollectHistory = new SimpleListProperty<>(FXCollections.<DataOutputHistory>observableArrayList());
 
     final ToggleGroup groupClassifierEvaluator = new ToggleGroup();
     final ToggleGroup groupClusterEvaluator = new ToggleGroup();
@@ -140,7 +144,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
         bindTreeConnectionAndButtonExecute();
 
-        bindSaveAndTxtSummary();
+        bindTxtSummaryWithSaveAndButton();
 
         // classfier evaluation options
         txtCrossVal.textProperty().addListener(e -> {
@@ -255,31 +259,45 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
         txtAssociator.setContextMenu(contextMenu);
 
         // binding
-        dataList.addListener(new ListChangeListener<String>() {
+//        dataList.addListener(new ListChangeListener<String>() {
+//
+//            @Override
+//            public void onChanged(ListChangeListener.Change<? extends String> c) {
+//
+////                System.out.println(dataList.size());
+//                if (dataList.size() > 1) {
+//                    btnUndo.setDisable(false);
+//                }
+//
+//                if (dataList.size() == 1) {
+//                    btnUndo.setDisable(true);
+//                }
+//            }
+//        });
 
-            @Override
-            public void onChanged(ListChangeListener.Change<? extends String> c) {
+//        btnApply.disableProperty().bind(Bindings.or(txtFilter.textProperty().isEqualTo(""), dataList.emptyProperty()));
+        btnApply.disableProperty().bind(Bindings.or(txtFilter.textProperty().isEmpty(), txtSummary.textProperty().isEmpty()));
 
-//                System.out.println(dataList.size());
-                if (dataList.size() > 1) {
-                    btnUndo.setDisable(false);
-                }
-
-                if (dataList.size() == 1) {
-                    btnUndo.setDisable(true);
-                }
-            }
-        });
-
-        btnApply.disableProperty().bind(Bindings.or(txtFilter.textProperty().isEqualTo(""), dataList.emptyProperty()));
-
-        tabClassify.disableProperty().bind(dataList.emptyProperty());
-        tabCluster.disableProperty().bind(dataList.emptyProperty());
-        tabAssociator.disableProperty().bind(dataList.emptyProperty());
-
+//        tabClassify.disableProperty().bind(dataList.emptyProperty());
+//        tabCluster.disableProperty().bind(dataList.emptyProperty());
+//        tabAssociator.disableProperty().bind(dataList.emptyProperty());
+        listDataCollected.setItems(dataCollectHistory);
         listClassScheme.setItems(classifierHistorys);
         listClustScheme.setItems(clusHistorys);
         listAssocScheme.setItems(assHistorys);
+
+        listDataCollected.setOnMouseClicked(e -> {
+            ObservableList<DataOutputHistory> out = listDataCollected.getSelectionModel().getSelectedItems();
+            DataOutputHistory output = null;
+            for (DataOutputHistory o : out) {
+                output = o;
+            }
+
+            if (output != null) {
+                this.txtSummary.setText(output.getOutput());
+            }
+
+        });
 
         listClassScheme.setOnMouseClicked(e -> {
             ObservableList<OutputHistory> out = listClassScheme.getSelectionModel().getSelectedItems();
@@ -329,7 +347,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
     }
 
-    private void bindSaveAndTxtSummary() {
+    private void bindTxtSummaryWithSaveAndButton() {
         // bind Save button
 
         txtSummary.textProperty().addListener((v, old, newValue) -> {
@@ -337,8 +355,17 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             String[] s = newValue.split("\\s");
             if (s[0].equals("@relation")) {
                 btnSave.setDisable(Boolean.FALSE);
+
+                tabClassify.setDisable(Boolean.FALSE);
+                tabCluster.setDisable(Boolean.FALSE);
+                tabAssociator.setDisable(Boolean.FALSE);
+
             } else {
                 btnSave.setDisable(Boolean.TRUE);
+
+                tabClassify.setDisable(Boolean.TRUE);
+                tabCluster.setDisable(Boolean.TRUE);
+                tabAssociator.setDisable(Boolean.TRUE);
             }
 
         });
@@ -398,7 +425,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
         try {
 
-            String data = this.dataList.get(dataList.size() - 1);
+//            String data = this.dataList.get(dataList.size() - 1);
+            // new code = no more undo 
+            String data = txtSummary.getText();
+            
             String associator = this.txtAssociator.getText();
             AssociateTask task;
 
@@ -441,7 +471,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
         try {
 
-            String data = this.dataList.get(dataList.size() - 1);
+//            String data = this.dataList.get(dataList.size() - 1);
+            // new code = no more undo
+            String data = txtSummary.getText();
+            
             String classifier = this.txtCluster.getText();
             ClusterTask task;
 
@@ -488,7 +521,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
 
         try {
 
-            String data = this.dataList.get(dataList.size() - 1);
+//            String data = this.dataList.get(dataList.size() - 1);
+            // new code = no more undo
+            String data = txtSummary.getText();
+            
             String classifier = this.txtClassifier.getText();
             ClassifyTask task;
 
@@ -497,8 +533,6 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             } else {
                 task = new ClassifyTask(data, classifier, evalution);
             }
-            
-           
 
             // Creating a button to cancel the execution of the task
             Button btnClose = new Button("X");
@@ -762,7 +796,9 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     public void handleBtnSave() {
 
         try {
-            boolean okClicked = mainApp.showFileChooser(this.dataList.get(dataList.size() - 1));
+//            boolean okClicked = mainApp.showFileChooser(this.dataList.get(dataList.size() - 1));
+            // new code = no more undo
+             boolean okClicked = mainApp.showFileChooser(txtSummary.getText());
 
             if (okClicked) {
 
@@ -786,7 +822,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                         options += args[i] + " ";
                     }
 
-                    String data = this.dataList.get(this.dataList.size() - 1);
+//                    String data = this.dataList.get(this.dataList.size() - 1);
+                    // New code = no more undo button
+                    String data = txtSummary.getText();
+                    
                     String filter = options;
 
                     try {
@@ -812,7 +851,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                         task.messageProperty().addListener((w, o, n) -> {
                             txtSummary.clear();
                             txtSummary.appendText(n + "\n");
-                            this.dataList.add(n);
+//                            this.dataList.add(n);
+
+                            this.dataCollectHistory.add(new DataOutputHistory(n, ((ManualDiscretizeTask) task).getTimeMillis()));
+                            this.listDataCollected.getSelectionModel().selectLast();
 
                             HBxPre.getChildren().remove(btnClose);
                         });
@@ -826,9 +868,12 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                 }
 
             } else {
-                if (!this.dataList.isEmpty()) {
-
-                    String data = this.dataList.get(this.dataList.size() - 1);
+//                if (!this.dataList.isEmpty()) {
+                    if (!this.txtSummary.getText().isEmpty()) {
+                        
+//                    String data = this.dataList.get(this.dataList.size() - 1);
+                    String data = this.txtSummary.getText();
+                    
                     String filter = "FILTER " + txtFilter.getText();
 
                     try {
@@ -854,7 +899,10 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
                         task.messageProperty().addListener((w, o, n) -> {
                             txtSummary.clear();
                             txtSummary.appendText(n + "\n");
-                            this.dataList.add(n);
+//                            this.dataList.add(n);
+
+                            this.dataCollectHistory.add(new DataOutputHistory(n, ((FilterTask) task).getTimeMillis()));
+                            this.listDataCollected.getSelectionModel().selectLast();
 
                             HBxPre.getChildren().remove(btnClose);
                         });
@@ -878,10 +926,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
     public void handleBtnExecute() {
 
         try {
-            // clear time text field
-            txtTimeMilis.clear();
-            
-            
+
             String ConnName = "";
 
             for (TreeItem item : this.treeCon.getSelectionModel().getSelectedItems()) {
@@ -938,20 +983,21 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             ((RetriverAndConvertTask) tasks).messageProperty().addListener((w, o, n) -> {
                 txtSummary.clear();
                 txtSummary.appendText(n + "\n");
-                if (!n.isEmpty()) {
-                    String[] s = n.split("\\s");
+//                if (!n.isEmpty()) {
+//                    String[] s = n.split("\\s");
+//
+//                    if (s[0].equals("@relation")) {
+//                        this.dataList.add(n);
+//                    } else {
+//                        this.dataList.clear();
+//                    }
+//
+//                }
 
-                    if (s[0].equals("@relation")) {
-                        this.dataList.add(n);
-                    } else {
-                        this.dataList.clear();
-                    }
+                this.dataCollectHistory.add(new DataOutputHistory(n, ((RetriverAndConvertTask) tasks).getTimeMillis()));
 
-                }
+                this.listDataCollected.getSelectionModel().selectLast();
 
-                txtTimeMilis.setText("Time taken to collect the data: " + ((RetriverAndConvertTask) tasks).getTimeMillis() + " milliseconds (ms)");
-
-//                System.out.println(">>>>>>>>>>>>>>>>.3 elapsedtime = " + ((RetriverAndConvertTask) tasks).getTimeMillis());
                 // Removing the button after finishing the process
                 HBxPre.getChildren().remove(btnClose);
 
@@ -967,11 +1013,11 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
         }
     }
 
-    @FXML
-    public void handleBtnUndo() {
-        if (dataList.size() > 1) {
-            this.dataList.remove(dataList.size() - 1);
-            this.txtSummary.setText(this.dataList.get(dataList.size() - 1));
-        }
-    }
+//    @FXML
+//    public void handleBtnUndo() {
+//        if (dataList.size() > 1) {
+//            this.dataList.remove(dataList.size() - 1);
+//            this.txtSummary.setText(this.dataList.get(dataList.size() - 1));
+//        }
+//    }
 }
