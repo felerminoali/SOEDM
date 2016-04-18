@@ -98,6 +98,8 @@ public class RetriverAndConvertTask extends Task<List<String>> implements Cancel
             if (totalBytesRead > 0) {
 
                 while ((linha = rd.readLine()) != null) {
+                    
+                    System.out.println(linha);
 
                     response.append(linha);
                     response.append('\r');
@@ -135,10 +137,11 @@ public class RetriverAndConvertTask extends Task<List<String>> implements Cancel
 
            
 
-        } catch (IOException ex) {
+        } catch (Exception ex) {
 
+            System.out.println("data web service exception: "+ex.getMessage());
 //            List<String> result = new ArrayList<>();
-            error.append("\nFailed connect to the Web service provider");
+            error.append("\nFailed connect to the Data Web service provider");
 //            result.add(error.toString());
             updateMessage(error.toString());
             updateProgress(0, 100);

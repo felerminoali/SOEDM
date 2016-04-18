@@ -11,6 +11,7 @@
     <artifactId>DMWS-ws</artifactId>
     <packaging>war</packaging>
     <name>DMWS-ws Maven Webapp</name>
+    
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -52,10 +53,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                 <version>3.1</version>
+                <version>3.1</version>
 
                 <configuration>
-                     <source>1.8</source>
+                    <source>1.8</source>
                     <target>1.8</target>
                     <includes>
                         <include>src/main/resources/*.java</include>

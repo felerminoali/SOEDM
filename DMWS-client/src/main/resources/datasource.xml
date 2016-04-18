@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<connections>
+<!--<connections>
     <datasource>
-        <name>MOODLE - 127.0.0.1:8282 - students_data</name>
+        <name>Moodle - Unilurio</name>
         <domainName>http://127.0.0.1:8282/moodle-latest-27/moodle</domainName>
         <token>9c4991bde66fe656ecc942d9b61e0f04</token>
         <remote>
@@ -9,16 +9,68 @@
         </remote>
     </datasource>
     <datasource>
-        <name>127.0.t.1:8282</name>
-        <domainName>http://127.8.0.1:8282/moodle-latest-27/moodle</domainName>
+        <name>Moodle- UCM </name>
+        <domainName>http://127.0.0.1:8282/moodle-latest-27/moodle</domainName>
+        <token>9c4991bde66fe656ecc942d9b61e0f04</token>
+        <remote>
+            <function>local_miningdata_get_students_data</function>
+        </remote>
+    </datasource>
+    
+</connections>-->
+
+<connections>
+    <datasource>
+        <name>1000</name>
+        <domainName>http://192.168.0.101:8282/moodle-latest-27-1000/moodle</domainName>
         <token>9c4991bde66fe656ecc942d9b61e0f04</token>
         <remote>
             <function>local_miningdata_get_students_data</function>
         </remote>
     </datasource>
     <datasource>
-        <name>127.0.0.1:8282::1000</name>
-        <domainName>http://127.0.0.1:8282/moodle-latest-27-1000/moodle</domainName>
+        <name>1500</name>
+        <domainName>http://192.168.0.101:8282/moodle-latest-27-1500/moodle</domainName>
+        <token>9c4991bde66fe656ecc942d9b61e0f04</token>
+        <remote>
+            <function>local_miningdata_get_students_data</function>
+        </remote>
+    </datasource>
+    <datasource>
+        <name>3500</name>
+        <domainName>http://192.168.0.101:8282/moodle-latest-27-3500/moodle</domainName>
+        <token>9c4991bde66fe656ecc942d9b61e0f04</token>
+        <remote>
+            <function>local_miningdata_get_students_data</function>
+        </remote>
+    </datasource>
+    <datasource>
+        <name>3000</name>
+        <domainName>http://192.168.0.101:8282/moodle-latest-27-3000/moodle</domainName>
+        <token>9c4991bde66fe656ecc942d9b61e0f04</token>
+        <remote>
+            <function>local_miningdata_get_students_data</function>
+        </remote>
+    </datasource>
+    <datasource>
+        <name>2500</name>
+        <domainName>http://192.168.0.101:8282/moodle-latest-27-2500/moodle</domainName>
+        <token>9c4991bde66fe656ecc942d9b61e0f04</token>
+        <remote>
+            <function>local_miningdata_get_students_data</function>
+        </remote>
+    </datasource>
+    <datasource>
+        <name>2000</name>
+        <domainName>http://192.168.0.101:8282/moodle-latest-27-2000/moodle</domainName>
+        <token>9c4991bde66fe656ecc942d9b61e0f04</token>
+        <remote>
+            <function>local_miningdata_get_students_data</function>
+        </remote>
+    </datasource>
+    <datasource>
+        <name>500</name>
+        <domainName>http://192.168.0.101:8282/moodle-latest-27/moodle</domainName>
         <token>9c4991bde66fe656ecc942d9b61e0f04</token>
         <remote>
             <function>local_miningdata_get_students_data</function>
