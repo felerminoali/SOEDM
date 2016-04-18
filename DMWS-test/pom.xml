@@ -75,7 +75,7 @@
             </plugin>
         </plugins>-->
         
-        <sourceDirectory>src/main/java</sourceDirectory>
+<!--        <sourceDirectory>src/main/java</sourceDirectory>
         <finalName>DMWS-ws</finalName>
         <plugins>
             <plugin>
@@ -93,6 +93,6 @@
             </plugin>
 
 
-        </plugins>
+        </plugins>-->
     </build>
 </project>

@@ -45,8 +45,8 @@ public class MoodleDataSource {
 
 		// ================================ conversao de xml to arrf format
 
-		List<Attribute> attrArray = new ArrayList<>();
-		List<AttributeRetrival> attrRetr = new ArrayList<>();
+		List<Attribute> attrArray = new ArrayList<Attribute>();
+		List<AttributeRetrival> attrRetr = new ArrayList<AttributeRetrival>();
 		String relation = "";
 		// Relation
 		for (RESPONSE.SINGLE.KEY key : keys) {
