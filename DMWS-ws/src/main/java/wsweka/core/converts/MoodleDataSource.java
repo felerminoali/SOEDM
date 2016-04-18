@@ -115,8 +115,6 @@ public class MoodleDataSource {
 
 		for (RESPONSE.SINGLE.KEY key : keys) {
 
-			// if (key.getName().equals("data")) {
-			// }
 
 			if (t) {
 				List<RESPONSE.SINGLE> singles = key.getMULTIPLE().getSINGLE();
