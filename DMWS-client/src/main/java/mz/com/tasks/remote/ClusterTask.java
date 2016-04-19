@@ -21,6 +21,8 @@ public class ClusterTask extends Task<List<String>> implements Cancelable {
     private String cluster;
     private String evaluation;
 
+    private long timeMillis = 0;
+
     public ClusterTask(String data, String cluster, String ecaluation) {
         this.data = data;
         this.cluster = cluster;
@@ -35,7 +37,7 @@ public class ClusterTask extends Task<List<String>> implements Cancelable {
 
     @Override
     protected List<String> call() throws Exception {
-
+        long starttime = System.currentTimeMillis();
         updateProgress(-1.0, 100);
         try {
 
@@ -51,7 +53,10 @@ public class ClusterTask extends Task<List<String>> implements Cancelable {
             updateMessage(newData);
             updateProgress(0, 100);
 
-//            return result;
+            long stoptime = System.currentTimeMillis();
+            long elapsedtime = stoptime - starttime;
+            this.timeMillis = elapsedtime;
+
             return new ArrayList<>();
         } catch (Exception e) {
 
@@ -67,5 +72,9 @@ public class ClusterTask extends Task<List<String>> implements Cancelable {
         updateMessage("Process cancelled!");
         updateProgress(0, 100);
         cancel(true);
+    }
+
+    public long getTimeMillis() {
+        return timeMillis;
     }
 }

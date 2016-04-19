@@ -453,7 +453,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             task.messageProperty().addListener((w, o, n) -> {
                 txtOutputAssociator.clear();
                 txtOutputAssociator.appendText(n + "\n");
-                this.assHistorys.add(new OutputHistory(n, associator, null));
+                this.assHistorys.add(new OutputHistory(n, associator, null, ((AssociateTask) task).getTimeMillis()));
                 this.listAssocScheme.getSelectionModel().selectLast();
 
                 HBxAss.getChildren().remove(btnClose);
@@ -503,7 +503,7 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             task.messageProperty().addListener((w, o, n) -> {
                 txtOutputCluster.clear();
                 txtOutputCluster.appendText(n + "\n");
-                this.clusHistorys.add(new OutputHistory(n, classifier, clusterEvaluation));
+                this.clusHistorys.add(new OutputHistory(n, classifier, clusterEvaluation, ((ClusterTask) task).getTimeMillis()));
                 this.listClustScheme.getSelectionModel().selectLast();
 
                 HBxClust.getChildren().remove(btnClose);
@@ -553,7 +553,9 @@ public class MainGUIController implements Initializable, EventHandler<ActionEven
             task.messageProperty().addListener((w, o, n) -> {
                 txtOutputClass.clear();
                 txtOutputClass.appendText(n + "\n");
-                this.classifierHistorys.add(new OutputHistory(n, classifier, evalution));
+                
+                   
+                this.classifierHistorys.add(new OutputHistory(n, classifier, evalution, ((ClassifyTask) task).getTimeMillis()));
                 this.listClassScheme.getSelectionModel().selectLast();
 
                 HBxClass.getChildren().remove(btnClose);

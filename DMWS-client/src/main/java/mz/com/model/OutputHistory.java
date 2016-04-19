@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -25,6 +26,8 @@ public final class OutputHistory {
     private StringProperty evaluation = new SimpleStringProperty("");
 
     private StringProperty titleProperty = new SimpleStringProperty("");
+    
+    private  SimpleLongProperty timeTaken = new SimpleLongProperty();
 
     public OutputHistory() {
         this(null, null, null);
@@ -39,7 +42,23 @@ public final class OutputHistory {
 
         titleProperty.set(toString());
     }
+    
+    
+     public OutputHistory(String output, String task, String evaluation, long timeTaken) {
+        this.output.set(output);
+        this.task.set(task);
+        this.evaluation.set(evaluation);
+        this.timeTaken.set(timeTaken);
 
+        this.date = new SimpleObjectProperty<Date>(Calendar.getInstance().getTime());
+
+        titleProperty.set(toString());
+    }
+
+     public  SimpleLongProperty timeTakenProperty() {
+        return this.timeTaken;
+    }
+    
     public StringProperty titleProperty() {
         return titleProperty;
     }
@@ -54,6 +73,14 @@ public final class OutputHistory {
 
     public void setOutput(String output) {
         this.output.set(output);
+    }
+    
+    public long getTimeTaken() {
+        return timeTaken.get();
+    }
+
+    public void setTimeTaken(long timeTaken) {
+        this.timeTaken.set(timeTaken);
     }
 
     public String getTask() {
@@ -217,6 +244,6 @@ public final class OutputHistory {
         String[] taskS = task.get().split("\\s");
         int lastOccur = taskS[0].lastIndexOf(".");
         String simplifiedTask = taskS[0].substring(lastOccur + 1);
-        return this.date.get().toString() + " - " + simplifiedTask;
+        return this.date.get().toString() + " - " + simplifiedTask + " " + timeTaken.get() + " ms";
     }
 }

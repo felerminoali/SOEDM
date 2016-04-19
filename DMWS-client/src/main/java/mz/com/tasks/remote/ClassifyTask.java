@@ -20,7 +20,10 @@ public class ClassifyTask extends Task<List<String>> implements Cancelable{
     private String data;
     private String classifier;
     private String evaluation;
+    
+    private long timeMillis = 0;
 
+    
     public ClassifyTask(String data, String classifier, String ecaluation) {
         this.data = data;
         this.classifier = classifier;
@@ -36,6 +39,7 @@ public class ClassifyTask extends Task<List<String>> implements Cancelable{
     @Override
     protected List<String> call() throws Exception {
 
+        long starttime = System.currentTimeMillis();
         updateProgress(-1.0, 100);
         try {
 
@@ -50,8 +54,11 @@ public class ClassifyTask extends Task<List<String>> implements Cancelable{
 //            result.add(newData);
             updateMessage(newData);
             updateProgress(0, 100);
-
-//            return result;
+            
+            long stoptime = System.currentTimeMillis();
+            long elapsedtime = stoptime - starttime;
+            this.timeMillis = elapsedtime;
+            
             return new ArrayList<>();
         } catch (Exception e) {
 
@@ -69,4 +76,9 @@ public class ClassifyTask extends Task<List<String>> implements Cancelable{
         updateProgress(0, 100);
         cancel(true);
     }
+    
+     public long getTimeMillis() {
+        return timeMillis;
+    }
+
 }

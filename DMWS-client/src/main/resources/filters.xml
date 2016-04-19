@@ -276,7 +276,7 @@ and open the template in the editor.
                 
             <config>
                 <filter>weka.filters.unsupervised.attribute.Remove</filter>
-                <defaults></defaults>
+                <defaults>-R 1-3</defaults>
             </config>
                 
             <config>

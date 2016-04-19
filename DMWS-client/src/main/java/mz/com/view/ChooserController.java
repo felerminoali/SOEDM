@@ -96,6 +96,7 @@ public class ChooserController implements Initializable {
 
              // super node - tem ser aultomatizado
             TreeItem<Object> root1 = makeBranch("Weka", root);
+            root1.setExpanded(true);
             
             Filters filters = (Filters) weka;
             for (jaxb.weka.filters.Filters.Config f : filters.getConfig()) {
@@ -109,6 +110,7 @@ public class ChooserController implements Initializable {
             
 //                     TreeItem<Object> strategyType = makeBranch(strategy, root);
                       TreeItem<Object> strategyType = makeBranch(strategy, root1);
+                      strategyType.setExpanded(true);
                      
                      for(InputType inputType : strategy.getInputType()){
                          TreeItem<Object> inputTypeName = makeBranch(inputType, strategyType);

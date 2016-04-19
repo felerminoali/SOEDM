@@ -15,10 +15,12 @@ import mz.com.wsweka.ElearningWekaWSService;
  *
  * @author Lenovo
  */
-public class AssociateTask extends Task<List<String>> implements Cancelable{
+public class AssociateTask extends Task<List<String>> implements Cancelable {
 
     private String data;
     private String associator;
+
+    private long timeMillis = 0;
 
     public AssociateTask(String data, String associator) {
         this.data = data;
@@ -28,6 +30,7 @@ public class AssociateTask extends Task<List<String>> implements Cancelable{
     @Override
     protected List<String> call() throws Exception {
 
+        long starttime = System.currentTimeMillis();
         updateProgress(-1.0, 100);
         try {
 
@@ -40,6 +43,10 @@ public class AssociateTask extends Task<List<String>> implements Cancelable{
             updateProgress(-1.0, 100);
             updateMessage(newData);
             updateProgress(0, 100);
+
+            long stoptime = System.currentTimeMillis();
+            long elapsedtime = stoptime - starttime;
+            this.timeMillis = elapsedtime;
 
             return new ArrayList<>();
         } catch (Exception e) {
@@ -56,6 +63,10 @@ public class AssociateTask extends Task<List<String>> implements Cancelable{
         updateMessage("Process cancelled!");
         updateProgress(0, 100);
         cancel(true);
+    }
+
+    public long getTimeMillis() {
+        return timeMillis;
     }
 
 }
